@@ -1,0 +1,41 @@
+select
+    case
+        when txn_prs_cde in (
+            'DEBIT_CARD_PAYMENT_NGCB',
+            'NGCB_REPAY_FSV'
+        ) then 'NGCB'
+
+        when txn_prs_cde in (
+            'BARCLAYCARD_REPAYMENT_LOW',
+            'BARCLAYCARD_REPAYMENT_HIGH',
+            'BARCLAYCARD_FULLSERVE_REPAYMENT_LOW',
+            'BARCLAYCARD_FULLSERVE_REPAYMENT_HIGH',
+            'BARCLAYCARD_IVR_REPAYMENT_HIGH',
+            'BARCLAYCARD_IVR_REPAYMENT_LOW'
+        ) then 'TRIUMPH'
+
+        else 'OTHER'
+    end as txn_category,
+
+    count(*) as txn_count
+
+from e_smartpay_db.to_txn_aud   -- 用你实际的表
+
+group by
+    case
+        when txn_prs_cde in (
+            'DEBIT_CARD_PAYMENT_NGCB',
+            'NGCB_REPAY_FSV'
+        ) then 'NGCB'
+
+        when txn_prs_cde in (
+            'BARCLAYCARD_REPAYMENT_LOW',
+            'BARCLAYCARD_REPAYMENT_HIGH',
+            'BARCLAYCARD_FULLSERVE_REPAYMENT_LOW',
+            'BARCLAYCARD_FULLSERVE_REPAYMENT_HIGH',
+            'BARCLAYCARD_IVR_REPAYMENT_HIGH',
+            'BARCLAYCARD_IVR_REPAYMENT_LOW'
+        ) then 'TRIUMPH'
+
+        else 'OTHER'
+    end
