@@ -1,27 +1,24 @@
-Attribute Name: TOTAL_ON_US_CHECK
+Attribute Name: TOTAL_ON_US_CHECK_ACCEPTS
 
 Related CTE(s):
-BASE_SUM1, BASE_SUM2
+FQ_BASE, BASE_SUM1
 
 Source Fields Used:
 - AGGREGATOR_INDICATOR
-- LINKED_APPLICATION_IDENTIFIER
 - PRE_APPROVED_INDICATOR
 - QUOTE_DECISION
-- QUOTE_STATUS_CODE
+- LINKED_APPLICATION_IDENTIFIER
 
 Technical Transformation Summary:
-Calculated as the sum of records classified under On-us eligibility outcomes (Accepted, Referred, Declined). 
-Each component is derived using conditional logic based on channel indicators, pre-approval flags, and decision outcomes.
+Calculated as the count of records where QUOTE_DECISION = 'Accept', using conditional logic to identify records belonging to the On-us eligibility stage. Filtering includes combinations of aggregator indicator, pre-approved flag, and linked application identifier.
 
 Business Logic:
-Represents the total number of records that reached the On-us eligibility stage and received a decision outcome (Accepted, Referred, or Declined). 
-This includes both aggregator-originated and direct applications that progressed to internal eligibility checks.
+Represents the number of records that reached the On-us eligibility stage and received an “Accept” decision outcome.
 
 Journey Stage:
 Stage 2 – On-us Eligibility Check (Second Check)
 
 Assumptions / Open Questions:
-- Clarify how On-us stage is defined in SQL (not solely based on AGGREGATOR_INDICATOR).
-- Confirm whether both aggregator and direct applications are included.
-- Validate alignment with dashboard metric "On-us Eligibility Checks".
+- Clarify how On-us stage is defined in the SQL logic.
+- Confirm whether both aggregator and direct journeys are included.
+- Validate whether LINKED_APPLICATION_IDENTIFIER = NULL correctly identifies this stage.
