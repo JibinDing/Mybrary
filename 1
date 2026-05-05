@@ -1,50 +1,45 @@
-Field: TOTAL_API_ACCEPTS_US_ACCEPT_APPLICATIONS
+Field: TOTAL_API_QUOTE_ACCEPT
 
 Business Meaning:
-Counts customers who received an Accept decision at the API / aggregator quote stage, progressed to submit a full application, and were then accepted at the On-Us / application decision stage.
+Counts the number of eligibility quotes generated via aggregator (API) channels that resulted in an "Accept" decision.
 
 Transformation Logic:
-- Aggregator/API journey identified using Aggregator_Indicator and APP_FLAG = 'Quote To App'
-- Initial API quote outcome is Accept
-- Record has progressed to application stage
-- Final QUOTE_DECISION = 'Accept'
+- Filter records where Aggregator_Indicator = 'Y' (API / aggregator channel)
+- QUOTE_DECISION = 'Accept'
+- Count quote-level records
 
 Journey Stage:
-API Quote Accept → On-Us / Application → Accept
+API Eligibility Check (Quote Stage)
 
 Summary:
-Represents aggregator customers who were accepted at the initial quote stage and also accepted during later application processing.
+Represents customers who passed the initial eligibility check via aggregator channels.
 
-Field: TOTAL_API_ACCEPTS_US_REFERRED_APPLICATIONS
+Field: TOTAL_API_QUOTE_REFERRALS
 
 Business Meaning:
-Counts customers who received an Accept decision at the API / aggregator quote stage, progressed to submit a full application, and were then referred at the On-Us / application decision stage.
+Counts the number of eligibility quotes generated via aggregator (API) channels that resulted in a "Refer" decision.
 
 Transformation Logic:
-- Aggregator/API journey identified using Aggregator_Indicator and APP_FLAG = 'Quote To App'
-- Initial API quote outcome is Accept
-- Record has progressed to application stage
-- Final QUOTE_DECISION = 'Refer'
+- Aggregator_Indicator = 'Y'
+- QUOTE_DECISION = 'Refer'
 
 Journey Stage:
-API Quote Accept → On-Us / Application → Refer
+API Eligibility Check (Quote Stage)
 
 Summary:
-Represents aggregator customers who were initially accepted at quote stage but referred during later application processing.
+Represents customers who require further review after initial eligibility check via aggregator channels.
 
-Field: TOTAL_API_ACCEPTS_US_DECLINED_APPLICATIONS
+Field: TOTAL_API_QUOTE_DECLINES
 
 Business Meaning:
-Counts customers who received an Accept decision at the API / aggregator quote stage, progressed to submit a full application, and were then declined / not eligible at the On-Us / application decision stage.
+Counts the number of eligibility quotes generated via aggregator (API) channels that resulted in a "Not Eligible" / declined decision.
 
 Transformation Logic:
-- Aggregator/API journey identified using Aggregator_Indicator and APP_FLAG = 'Quote To App'
-- Initial API quote outcome is Accept
-- Record has progressed to application stage
-- Final QUOTE_DECISION = 'Not Eligible' / Decline
+- Aggregator_Indicator = 'Y'
+- QUOTE_DECISION = 'Not Eligible'
 
 Journey Stage:
-API Quote Accept → On-Us / Application → Decline
+API Eligibility Check (Quote Stage)
 
 Summary:
-Represents aggregator customers who were initially accepted at quote stage but declined during later application processing.
+Represents customers who did not pass the initial eligibility check via aggregator channels.
