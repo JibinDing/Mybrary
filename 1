@@ -1,11 +1,11 @@
-Field: ON_US_ACCEPTED_APPLICATIONS
+Field: ON_US_REFERRED_APPLICATIONS
 
 Business Meaning:
-Counts the number of direct (non-aggregator) customers who received an "Accept" decision at the On-Us eligibility stage and subsequently submitted a full application.
+Counts the number of direct (non-aggregator) customers who received a "Refer" decision at the On-Us eligibility stage and subsequently submitted a full application.
 
 Transformation Logic:
 - Filter records where Aggregator_Indicator is not 'Y' (direct channel)
-- QUOTE_DECISION = 'Accept'
+- QUOTE_DECISION = 'Refer'
 - QTIND = 'F' (indicates full application submission)
 - LINKED_APPLICATION_IDENTIFIER is null (first-time application)
 
@@ -13,4 +13,20 @@ Journey Stage:
 Direct Eligibility (On-Us) → Full Application Submission
 
 Summary:
-Represents customers who passed the direct eligibility check and converted into full applications.
+Represents direct customers who were referred at eligibility stage and still progressed into full applications.
+Field: ON_US_DECLINED_APPLICATIONS
+
+Business Meaning:
+Counts the number of direct (non-aggregator) customers who received a "Not Eligible" / declined decision at the On-Us eligibility stage and subsequently submitted a full application.
+
+Transformation Logic:
+- Filter records where Aggregator_Indicator is not 'Y' (direct channel)
+- QUOTE_DECISION = 'Not Eligible'
+- QTIND = 'F' (indicates full application submission)
+- LINKED_APPLICATION_IDENTIFIER is null (first-time application)
+
+Journey Stage:
+Direct Eligibility (On-Us) → Full Application Submission
+
+Summary:
+Represents direct customers who were declined at eligibility stage but still progressed into full applications.
