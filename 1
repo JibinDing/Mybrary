@@ -1,15 +1,16 @@
-Field: TOTAL_ACCEPT_APPLICATIONS_ACCEPTED
+Field: ON_US_ACCEPTED_APPLICATIONS
 
 Business Meaning:
-Counts the number of applications that were ultimately accepted, where the customer had previously received an accepted quote at the API (aggregator) stage.
+Counts the number of direct (non-aggregator) customers who received an "Accept" decision at the On-Us eligibility stage and subsequently submitted a full application.
 
-Transformation Logic (High-level):
-- Filter records where QUOTE_DECISION = 'Accept'
-- Ensure the record represents a progressed application (LINKED_APPLICATION_IDENTIFIER is not null)
-- Include journeys originating from aggregator/API quotes
+Transformation Logic:
+- Filter records where Aggregator_Indicator is not 'Y' (direct channel)
+- QUOTE_DECISION = 'Accept'
+- QTIND = 'F' (indicates full application submission)
+- LINKED_APPLICATION_IDENTIFIER is null (first-time application)
 
 Journey Stage:
-Aggregator Quote (Accept) → On-Us → Final Application (Accept)
+Direct Eligibility (On-Us) → Full Application Submission
 
 Summary:
-This metric represents the successful conversion from an accepted API quote to a final accepted application.
+Represents customers who passed the direct eligibility check and converted into full applications.
