@@ -1,23 +1,12 @@
-Attribute Name: TOTAL_API_QUOTE
+Please explain how the BDP field TOTAL_API_QUOTE is derived in this SQL.
 
-Related CTE(s):
-FQ_BASE, ALL_APPS, IHQ_COMB, IHQ_SAMP1, BASE_SUM1
+Return:
+1. Related CTE(s)
+2. Source fields used
+3. Technical transformation summary
+4. Business meaning in plain English
+5. Journey stage
+6. Any assumptions or open questions
 
-Source Fields Used:
-- AGGREGATOR_INDICATOR
-- QUOTE_STATUS_CODE
-- APPLICATION_IDENTIFIER
-
-Technical Transformation Summary:
-Calculated as a count of records where AGGREGATOR_INDICATOR = 'Y', representing records originating from aggregator channels. Aggregation is performed in BASE_SUM1.
-
-Business Logic:
-Represents the total number of eligibility quote records generated via aggregator channels. These correspond to the initial stage of the customer journey before progressing to further eligibility checks or full applications.
-
-Journey Stage:
-Stage 1 – API / Aggregator Quote (First Check)
-
-Assumptions / Open Questions:
-- Confirm whether this metric includes only quote-level records (QUOTE_STATUS_CODE = 'Q') or also includes full application records ('F').
-- Confirm the grain of counting (quote-level vs application-level).
-- Validate alignment with the "Aggregator Quote to Conversion" metric in the dashboard.
+Context: This field appears in the dashboard as “Aggregator Quote to Conversion”.
+Do not explain the SQL line by line. Focus on how this dashboard/reporting metric is calculated.
