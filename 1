@@ -1,45 +1,29 @@
-Field: TOTAL_API_QUOTE_ACCEPT
+Completed detailed analysis of BDP aggregator SQL logic and derived key reporting fields.
 
-Business Meaning:
-Counts the number of eligibility quotes generated via aggregator (API) channels that resulted in an "Accept" decision.
+- Broke down core KPI metrics across the full customer journey:
+  - API Quote stage (TOTAL_API_QUOTE and outcomes: Accept / Refer / Decline)
+  - On-Us Eligibility stage (TOTAL_ON_US_CHECK and outcomes)
+  - Application stage (TOTAL_ACCEPT_APPLICATIONS_* and On-Us application metrics)
+  - Cross-stage conversion metrics (e.g., TOTAL_API_QUOTE_ACCEPT_CHECK, TOTAL_API_ACCEPTS_US_*)
 
-Transformation Logic:
-- Filter records where Aggregator_Indicator = 'Y' (API / aggregator channel)
-- QUOTE_DECISION = 'Accept'
-- Count quote-level records
+- Documented derivation logic for key fields including:
+  - Source CTEs and dependencies
+  - Transformation logic (CASE WHEN conditions, filters, aggregation)
+  - Business meaning and mapping to customer journey stages
 
-Journey Stage:
-API Eligibility Check (Quote Stage)
+- Identified and validated the 3-stage funnel structure:
+  1. API (Aggregator) eligibility check
+  2. On-Us eligibility check
+  3. Final application decision
 
-Summary:
-Represents customers who passed the initial eligibility check via aggregator channels.
+- Started refining derived attributes documentation:
+  - Differentiated direct mappings vs derived fields
+  - Added simplified business logic explanations for derived metrics
 
-Field: TOTAL_API_QUOTE_REFERRALS
+- Cross-referenced dashboard metrics with SQL outputs to ensure alignment
 
-Business Meaning:
-Counts the number of eligibility quotes generated via aggregator (API) channels that resulted in a "Refer" decision.
-
-Transformation Logic:
-- Aggregator_Indicator = 'Y'
-- QUOTE_DECISION = 'Refer'
-
-Journey Stage:
-API Eligibility Check (Quote Stage)
-
-Summary:
-Represents customers who require further review after initial eligibility check via aggregator channels.
-
-Field: TOTAL_API_QUOTE_DECLINES
-
-Business Meaning:
-Counts the number of eligibility quotes generated via aggregator (API) channels that resulted in a "Not Eligible" / declined decision.
-
-Transformation Logic:
-- Aggregator_Indicator = 'Y'
-- QUOTE_DECISION = 'Not Eligible'
-
-Journey Stage:
-API Eligibility Check (Quote Stage)
-
-Summary:
-Represents customers who did not pass the initial eligibility check via aggregator channels.
+Next Steps:
+- Finalise documentation of CTE-level data flow (FQ_BASE → ALL_APPS → BASE_SUM layers)
+- Clarify decision logic (QUOTE_DECISION mapping) across stages
+- Continue enhancing transformation logic descriptions for derived fields
+- Capture open questions for SME (Steve) where logic is ambiguous
