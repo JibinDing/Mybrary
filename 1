@@ -1,12 +1,26 @@
-Please explain how the BDP field TOTAL_API_QUOTE is derived in this SQL.
+Attribute Name: TOTAL_API_QUOTE_ACCEPT_CHECK
 
-Return:
-1. Related CTE(s)
-2. Source fields used
-3. Technical transformation summary
-4. Business meaning in plain English
-5. Journey stage
-6. Any assumptions or open questions
+Related CTE(s):
+BASE_SUM1, BASE_SUM2
 
-Context: This field appears in the dashboard as “Aggregator Quote to Conversion”.
-Do not explain the SQL line by line. Focus on how this dashboard/reporting metric is calculated.
+Source Fields Used:
+- AGGREGATOR_INDICATOR
+- LINKED_APPLICATION_IDENTIFIER
+- PRE_APPROVED_INDICATOR
+- QUOTE_STATUS_CODE
+- Decision outcome fields (Accepted / Referred / Declined)
+
+Technical Transformation Summary:
+Calculated as the sum of application records originating from aggregator quotes that progressed to a subsequent eligibility stage. The metric is derived by applying filtering conditions on aggregator channel records and identifying those linked to further processing stages, with outcomes split by final decision categories.
+
+Business Logic:
+Represents the number of aggregator-originated quote records that progressed beyond the initial quote stage into further eligibility checks, along with their resulting decision outcomes (Accepted, Referred, Declined).
+
+Journey Stage:
+Stage 1 → Stage 2 transition  
+(API / Aggregator Quote → On-us Eligibility Check)
+
+Assumptions / Open Questions:
+- Clarify how On-us eligibility stage is identified in the SQL logic.
+- Confirm whether LINKED_APPLICATION_IDENTIFIER reliably indicates progression to the next stage.
+- Validate alignment with dashboard metric "Aggregator Quote Booked".
