@@ -1,32 +1,50 @@
-Field: ON_US_REFERRED_APPLICATIONS
+Field: TOTAL_API_ACCEPTS_US_ACCEPT_APPLICATIONS
 
 Business Meaning:
-Counts the number of direct (non-aggregator) customers who received a "Refer" decision at the On-Us eligibility stage and subsequently submitted a full application.
+Counts customers who received an Accept decision at the API / aggregator quote stage, progressed to submit a full application, and were then accepted at the On-Us / application decision stage.
 
 Transformation Logic:
-- Filter records where Aggregator_Indicator is not 'Y' (direct channel)
-- QUOTE_DECISION = 'Refer'
-- QTIND = 'F' (indicates full application submission)
-- LINKED_APPLICATION_IDENTIFIER is null (first-time application)
+- Aggregator/API journey identified using Aggregator_Indicator and APP_FLAG = 'Quote To App'
+- Initial API quote outcome is Accept
+- Record has progressed to application stage
+- Final QUOTE_DECISION = 'Accept'
 
 Journey Stage:
-Direct Eligibility (On-Us) → Full Application Submission
+API Quote Accept → On-Us / Application → Accept
 
 Summary:
-Represents direct customers who were referred at eligibility stage and still progressed into full applications.
-Field: ON_US_DECLINED_APPLICATIONS
+Represents aggregator customers who were accepted at the initial quote stage and also accepted during later application processing.
+
+Field: TOTAL_API_ACCEPTS_US_REFERRED_APPLICATIONS
 
 Business Meaning:
-Counts the number of direct (non-aggregator) customers who received a "Not Eligible" / declined decision at the On-Us eligibility stage and subsequently submitted a full application.
+Counts customers who received an Accept decision at the API / aggregator quote stage, progressed to submit a full application, and were then referred at the On-Us / application decision stage.
 
 Transformation Logic:
-- Filter records where Aggregator_Indicator is not 'Y' (direct channel)
-- QUOTE_DECISION = 'Not Eligible'
-- QTIND = 'F' (indicates full application submission)
-- LINKED_APPLICATION_IDENTIFIER is null (first-time application)
+- Aggregator/API journey identified using Aggregator_Indicator and APP_FLAG = 'Quote To App'
+- Initial API quote outcome is Accept
+- Record has progressed to application stage
+- Final QUOTE_DECISION = 'Refer'
 
 Journey Stage:
-Direct Eligibility (On-Us) → Full Application Submission
+API Quote Accept → On-Us / Application → Refer
 
 Summary:
-Represents direct customers who were declined at eligibility stage but still progressed into full applications.
+Represents aggregator customers who were initially accepted at quote stage but referred during later application processing.
+
+Field: TOTAL_API_ACCEPTS_US_DECLINED_APPLICATIONS
+
+Business Meaning:
+Counts customers who received an Accept decision at the API / aggregator quote stage, progressed to submit a full application, and were then declined / not eligible at the On-Us / application decision stage.
+
+Transformation Logic:
+- Aggregator/API journey identified using Aggregator_Indicator and APP_FLAG = 'Quote To App'
+- Initial API quote outcome is Accept
+- Record has progressed to application stage
+- Final QUOTE_DECISION = 'Not Eligible' / Decline
+
+Journey Stage:
+API Quote Accept → On-Us / Application → Decline
+
+Summary:
+Represents aggregator customers who were initially accepted at quote stage but declined during later application processing.
