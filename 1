@@ -1,24 +1,15 @@
-Attribute Name: TOTAL_ON_US_CHECK_ACCEPTS
+Field: TOTAL_ACCEPT_APPLICATIONS_ACCEPTED
 
-Related CTE(s):
-FQ_BASE, BASE_SUM1
+Business Meaning:
+Counts the number of applications that were ultimately accepted, where the customer had previously received an accepted quote at the API (aggregator) stage.
 
-Source Fields Used:
-- AGGREGATOR_INDICATOR
-- PRE_APPROVED_INDICATOR
-- QUOTE_DECISION
-- LINKED_APPLICATION_IDENTIFIER
-
-Technical Transformation Summary:
-Calculated as the count of records where QUOTE_DECISION = 'Accept', using conditional logic to identify records belonging to the On-us eligibility stage. Filtering includes combinations of aggregator indicator, pre-approved flag, and linked application identifier.
-
-Business Logic:
-Represents the number of records that reached the On-us eligibility stage and received an “Accept” decision outcome.
+Transformation Logic (High-level):
+- Filter records where QUOTE_DECISION = 'Accept'
+- Ensure the record represents a progressed application (LINKED_APPLICATION_IDENTIFIER is not null)
+- Include journeys originating from aggregator/API quotes
 
 Journey Stage:
-Stage 2 – On-us Eligibility Check (Second Check)
+Aggregator Quote (Accept) → On-Us → Final Application (Accept)
 
-Assumptions / Open Questions:
-- Clarify how On-us stage is defined in the SQL logic.
-- Confirm whether both aggregator and direct journeys are included.
-- Validate whether LINKED_APPLICATION_IDENTIFIER = NULL correctly identifies this stage.
+Summary:
+This metric represents the successful conversion from an accepted API quote to a final accepted application.
