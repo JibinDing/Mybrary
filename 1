@@ -1,11 +1,28 @@
-Please explain how the BDP field TOTAL_CHECK is derived in this SQL.
+Attribute Name: TOTAL_CHECK
 
-Return:
-1. Related CTE(s)
-2. Source fields used
-3. Technical transformation summary
-4. Business meaning in plain English
-5. Journey stage
-6. Any assumptions or open questions
+Related CTE(s):
+BASE_SUM1, BASE_SUM2, base_sum_final
 
-Do not explain the SQL line by line. Focus on how this dashboard/reporting metric is calculated.
+Source Fields Used:
+Derived from aggregated application records using:
+- QUOTE_STATUS_CODE
+- AggregATOR_INDICATOR
+- Decision / outcome fields (Accepted / Referred / Declined)
+- Channel / On-us indicators
+
+Technical Transformation Summary:
+TOTAL_CHECK is calculated as a sum of multiple aggregated metrics representing different stages of the application journey, including API quotes, on-us eligibility checks, and quote-to-application transitions.
+
+Business Logic:
+Represents the total volume of eligibility checks and application-related records across the full customer acquisition journey. This includes initial aggregator quote checks, on-us eligibility checks, and records that progressed to applications.
+
+Journey Stage:
+Cross-journey metric covering:
+- First Check (Aggregator / API)
+- Second Eligibility Check (On-us)
+- Final Application
+
+Assumptions / Open Questions:
+- It is unclear whether component metrics are mutually exclusive or overlapping.
+- Confirm whether this metric is intended for reconciliation or reporting purposes.
+- Validate alignment with the "Total Eligibility Checks" metric in the dashboard.
