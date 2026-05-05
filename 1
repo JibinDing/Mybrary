@@ -1,0 +1,41 @@
+You are analysing a large SQL stored procedure (~1600 lines) that builds a credit card application aggregator.
+
+Do NOT explain SQL line-by-line.
+
+Your goal is to understand the DATA FLOW and APPLICATION JOURNEY.
+
+Tasks:
+
+1. Identify all major CTEs and group them into logical phases.
+
+2. Identify the last CTE before final aggregation (where data is still at application level).
+
+3. Explain how a single APPLICATION_IDENTIFIER flows through the SQL:
+   - How many rows can exist per application?
+   - How rows evolve across stages
+
+4. Identify how the following journey stages are represented:
+   - First check (Aggregator / APA)
+   - Second eligibility check (On-us)
+   - Final application
+
+5. Identify which fields are used to distinguish these stages:
+   - QUOTE_STATUS_CODE
+   - LINKED_APPLICATION_IDENTIFIER
+   - SDS_COUNTER
+   - decision-related fields
+
+6. Explain the logic in plain English (business-friendly), not SQL.
+
+7. Identify key derived attributes and explain their business meaning (briefly).
+
+8. Clearly highlight any assumptions or uncertainties.
+
+Output format:
+
+- High-level phases
+- Journey stage mapping
+- Key fields and logic
+- Application-level dataset (final CTE before aggregation)
+- Derived attributes summary
+- Assumptions / gaps
