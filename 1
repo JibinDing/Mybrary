@@ -1,26 +1,35 @@
-Technical Transformation Summary:
-Calculated as the count of records where QUOTE_DECISION = 'Accept', using conditional logic based on AGGREGATOR_INDICATOR, PRE_APPROVED_INDICATOR, and LINKED_APPLICATION_IDENTIFIER.
+Business Meaning:
+Counts Direct On-Us eligibility records where the eligibility outcome was “Accept” and the customer subsequently submitted a full application.
 
-Business Logic:
-Represents On-Us eligibility quote records with an 'Accept' decision outcome.
-
-Journey Stage:
-On-Us Eligibility Outcome
-
-Technical Transformation Summary:
-Calculated as the count of records where QUOTE_DECISION = 'Refer', using conditional logic based on AGGREGATOR_INDICATOR, PRE_APPROVED_INDICATOR, and LINKED_APPLICATION_IDENTIFIER.
-
-Business Logic:
-Represents On-Us eligibility quote records with a 'Refer' decision outcome.
+Transformation Logic:
+- Uses non-aggregator / direct On-Us conditions based on AGGREGATOR_INDICATOR and PRE_APPROVED_INDICATOR
+- QUOTE_DECISION = 'Accept'
+- QTIND = 'F', indicating full application submission
+- LINKED_APPLICATION_IDENTIFIER IS NULL, indicating a standalone / non-linked journey
 
 Journey Stage:
-On-Us Eligibility Outcome
+Direct On-Us Eligibility Outcome → Full Application Submission
 
-Technical Transformation Summary:
-Calculated as the count of records where QUOTE_DECISION = 'Not Eligible', using conditional logic based on AGGREGATOR_INDICATOR, PRE_APPROVED_INDICATOR, and LINKED_APPLICATION_IDENTIFIER.
+Business Meaning:
+Counts Direct On-Us eligibility records where the eligibility outcome was “Refer” and the customer subsequently submitted a full application.
 
-Business Logic:
-Represents On-Us eligibility quote records that were not eligible at the quote assessment stage.
+Transformation Logic:
+- Uses non-aggregator / direct On-Us conditions based on AGGREGATOR_INDICATOR and PRE_APPROVED_INDICATOR
+- QUOTE_DECISION = 'Refer'
+- QTIND = 'F', indicating full application submission
+- LINKED_APPLICATION_IDENTIFIER IS NULL, indicating a standalone / non-linked journey
 
 Journey Stage:
-On-Us Eligibility Outcome
+Direct On-Us Eligibility Outcome → Full Application Submission
+
+Business Meaning:
+Counts Direct On-Us eligibility records where the eligibility outcome was “Not Eligible” and the customer subsequently submitted a full application.
+
+Transformation Logic:
+- Uses non-aggregator / direct On-Us conditions based on AGGREGATOR_INDICATOR and PRE_APPROVED_INDICATOR
+- QUOTE_DECISION = 'Not Eligible'
+- QTIND = 'F', indicating full application submission
+- LINKED_APPLICATION_IDENTIFIER IS NULL, indicating a standalone / non-linked journey
+
+Journey Stage:
+Direct On-Us Eligibility Outcome → Full Application Submission
