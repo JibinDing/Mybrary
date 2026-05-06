@@ -1,20 +1,35 @@
-For the following metrics:
+Analyze the business and technical purpose of LINKED_APPLICATION_IDENTIFIER in the customer application journey.
 
-- ON_US_ACCEPTED_APP_ACCEPTED
-- ON_US_ACCEPTED_APP_REFERRED
-- ON_US_ACCEPTED_APP_DECLINED
+Please review the SQL logic and identify:
 
-identify the exact field and values used to determine the FINAL application outcome split.
+1. In which metrics or CASE WHEN conditions LINKED_APPLICATION_IDENTIFIER is used.
 
-I want to know:
+2. What is the difference between:
+   - LINKED_APPLICATION_IDENTIFIER IS NULL
+   - LINKED_APPLICATION_IDENTIFIER IS NOT NULL
 
-1. Which field determines the final application decision?
-2. What values represent:
-   - accepted
-   - referred
-   - declined
-3. Is QTIND='F' used to identify submitted full applications?
-4. Is QUOTE_DECISION only the initial eligibility outcome?
-5. Does the final split happen using FULL_APPLICATION_STATUS_CODE or another field?
+3. Does this field indicate:
+   - a customer proceeded from quote to full application?
+   - a linked/continued application journey?
+   - an aggregator/API journey?
+   - a previous application relationship?
+   - or something else?
 
-Please provide the exact CASE WHEN logic from the SQL.
+4. For the following metrics, explain how LINKED_APPLICATION_IDENTIFIER impacts the logic:
+   - TOTAL_ON_US_CHECK_ACCEPTS
+   - ON_US_ACCEPTED_APPLICATIONS
+   - ON_US_ACCEPTED_APP_ACCEPTED
+   - TOTAL_ACCEPT_APPLICATIONS_ACCEPTED
+   - API_ACCEPTS_US_ACCEPTS_APP_ACCEPTS
+
+5. Is LINKED_APPLICATION_IDENTIFIER mainly being used to distinguish:
+   - direct standalone applications
+   vs
+   linked quote-to-application journeys?
+
+6. Please provide:
+   - exact SQL conditions
+   - business interpretation
+   - customer journey interpretation
+
+Focus on understanding the journey flow rather than only listing SQL syntax.
