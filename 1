@@ -1,16 +1,20 @@
-Analyze the following metrics relationship:
+For the following metrics:
 
-- ON_US_ACCEPTED_APPLICATIONS
 - ON_US_ACCEPTED_APP_ACCEPTED
 - ON_US_ACCEPTED_APP_REFERRED
 - ON_US_ACCEPTED_APP_DECLINED
 
-Please explain:
+identify the exact field and values used to determine the FINAL application outcome split.
 
-1. Whether ON_US_ACCEPTED_APPLICATIONS represents customers who submitted a full application
-2. Whether the *_APP_* metrics represent final application outcomes
-3. Which field determines the final split into Accepted / Referred / Declined
-4. Whether this is a later-stage application decision after the initial eligibility outcome
-5. How the customer journey progresses across these metrics
+I want to know:
 
-Focus specifically on the business journey and decision flow.
+1. Which field determines the final application decision?
+2. What values represent:
+   - accepted
+   - referred
+   - declined
+3. Is QTIND='F' used to identify submitted full applications?
+4. Is QUOTE_DECISION only the initial eligibility outcome?
+5. Does the final split happen using FULL_APPLICATION_STATUS_CODE or another field?
+
+Please provide the exact CASE WHEN logic from the SQL.
