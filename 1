@@ -1,35 +1,116 @@
-Business Meaning:
-Counts Direct On-Us eligibility records where the eligibility outcome was “Accept” and the customer subsequently submitted a full application.
+ON_US_ACCEPTED_APP_ACCEPTED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Accept, who submitted a full application, and whose final application outcome was accepted/booked.
 
 Transformation Logic:
-- Uses non-aggregator / direct On-Us conditions based on AGGREGATOR_INDICATOR and PRE_APPROVED_INDICATOR
-- QUOTE_DECISION = 'Accept'
-- QTIND = 'F', indicating full application submission
-- LINKED_APPLICATION_IDENTIFIER IS NULL, indicating a standalone / non-linked journey
+QUOTE_DECISION = 'Accept'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE = 'COMPLETE'
 
 Journey Stage:
-Direct On-Us Eligibility Outcome → Full Application Submission
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
 
-Business Meaning:
-Counts Direct On-Us eligibility records where the eligibility outcome was “Refer” and the customer subsequently submitted a full application.
+ON_US_ACCEPTED_APP_REFERRED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Accept, who submitted a full application, and whose final application outcome was referred.
 
 Transformation Logic:
-- Uses non-aggregator / direct On-Us conditions based on AGGREGATOR_INDICATOR and PRE_APPROVED_INDICATOR
-- QUOTE_DECISION = 'Refer'
-- QTIND = 'F', indicating full application submission
-- LINKED_APPLICATION_IDENTIFIER IS NULL, indicating a standalone / non-linked journey
+QUOTE_DECISION = 'Accept'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE = 'REFER'
 
 Journey Stage:
-Direct On-Us Eligibility Outcome → Full Application Submission
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
 
-Business Meaning:
-Counts Direct On-Us eligibility records where the eligibility outcome was “Not Eligible” and the customer subsequently submitted a full application.
+ON_US_ACCEPTED_APP_DECLINED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Accept, who submitted a full application, and whose final application outcome was declined / not completed.
 
 Transformation Logic:
-- Uses non-aggregator / direct On-Us conditions based on AGGREGATOR_INDICATOR and PRE_APPROVED_INDICATOR
-- QUOTE_DECISION = 'Not Eligible'
-- QTIND = 'F', indicating full application submission
-- LINKED_APPLICATION_IDENTIFIER IS NULL, indicating a standalone / non-linked journey
+QUOTE_DECISION = 'Accept'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE NOT IN ('COMPLETE', 'REFER')
 
 Journey Stage:
-Direct On-Us Eligibility Outcome → Full Application Submission
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
+
+ON_US_REFERRED_APP_ACCEPTED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Refer, who submitted a full application, and whose final application outcome was accepted/booked.
+
+Transformation Logic:
+QUOTE_DECISION = 'Refer'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE = 'COMPLETE'
+
+Journey Stage:
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
+
+ON_US_REFERRED_APP_REFERRED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Refer, who submitted a full application, and whose final application outcome was referred.
+
+Transformation Logic:
+QUOTE_DECISION = 'Refer'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE = 'REFER'
+
+Journey Stage:
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
+
+ON_US_REFERRED_APP_DECLINED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Refer, who submitted a full application, and whose final application outcome was declined / not completed.
+
+Transformation Logic:
+QUOTE_DECISION = 'Refer'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE NOT IN ('COMPLETE', 'REFER')
+
+Journey Stage:
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
+
+ON_US_DECLINED_APP_ACCEPTED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Not Eligible, who submitted a full application, and whose final application outcome was accepted/booked.
+
+Transformation Logic:
+QUOTE_DECISION = 'Not Eligible'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE = 'COMPLETE'
+
+Journey Stage:
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
+
+ON_US_DECLINED_APP_REFERRED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Not Eligible, who submitted a full application, and whose final application outcome was referred.
+
+Transformation Logic:
+QUOTE_DECISION = 'Not Eligible'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE = 'REFER'
+
+Journey Stage:
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
+
+ON_US_DECLINED_APP_DECLINED
+Business Logic:
+Direct On-Us customers whose eligibility outcome was Not Eligible, who submitted a full application, and whose final application outcome was declined / not completed.
+
+Transformation Logic:
+QUOTE_DECISION = 'Not Eligible'
+QTIND = 'F'
+LINKED_APPLICATION_IDENTIFIER IS NULL
+FULL_APPLICATION_STATUS_CODE NOT IN ('COMPLETE', 'REFER')
+
+Journey Stage:
+Direct On-Us Eligibility Outcome → Full Application Submission → Final Application Outcome
