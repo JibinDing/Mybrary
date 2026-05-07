@@ -1,0 +1,38 @@
+I am documenting the BDP transformation logic for channel derivations used in the Aggregator / MAR reporting flow.
+
+Please analyse the SQL logic and identify:
+
+1. Which source FTP fields are used to derive:
+- Channel Level 1
+- Channel Level 2
+- Channel Level 3
+- Channel Level 4
+
+2. All transformation logic applied, including:
+- CASE WHEN rules
+- LEFT / RIGHT / SUBSTRING usage
+- concatenation logic
+- lookup / mapping logic
+- prefix handling
+- aggregator identification logic
+
+3. Expected source values and derived outputs.
+Please provide mappings in this format:
+
+Source Field | Source Value / Pattern | Transformation Logic | Derived Output | Business Meaning
+
+4. Specifically check whether:
+- INTERNET_MEDIA_CODE
+- CHANNEL_CODE
+- ACQUISITION_SEGMENT_2
+- CLASS_CODE
+
+are involved in any derivations.
+
+5. Identify where aggregator names (MSM, Experian, CompareTheMarket, etc.) are derived from source values.
+
+6. Highlight any logic where only the first 3 characters are used.
+
+7. Explain which derived fields are ultimately surfaced in MAR dashboard reporting.
+
+Please focus on business transformation understanding and data lineage, not only raw SQL syntax.
