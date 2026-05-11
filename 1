@@ -1,22 +1,8 @@
-I am validating whether the MAR/AURA attribute “Product” is available in BDP.
+For the AURA attribute “Risk Segment”, check whether it is available in the BDP final output / BASE_SUM layer.
 
-Please analyse the SQL and identify:
+Please provide:
+1. Whether it is available in BDP
+2. The exact BDP field name(s)
+3. Whether it is direct or derived
 
-1. Which BDP field(s) represent Product / Product Applied.
-2. Which source FDP table and source column(s) are used.
-3. Whether Product is a direct source field or derived through transformation logic.
-4. Any CASE WHEN logic or mapping rules used to derive product values.
-5. Whether product values such as Amazon, Avios, Avios Plus, Initial, Platinum, Rewards No Fee are available.
-6. Whether Product is related to REQUESTED_PRODUCT_DMI_CODE, OFFERED_PRODUCT_DMI_CODE, PRODUCT_CODE, REQUESTED_PRODUCT_CLASS_CODE, ACQ_SEGMENT1, or ACQ_SEGMENT2.
-7. Whether the field is available in the final BDP output / BASE_SUM layer.
-8. Final conclusion: Available in BDP / Partially Available / Not Available / TBC.
-
-Please return the answer in this format:
-
-- Attribute: Product
-- Source Field(s)
-- Related CTE(s)
-- Transformation Logic
-- Expected Values
-- Availability Status
-- Notes / Open Questions
+Keep the answer concise and focused only on field availability/mapping.
