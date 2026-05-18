@@ -1,0 +1,32 @@
+Hi Rinika,
+
+I have completed the SmartPay BDP DEV pipeline setup and successfully created + loaded data into the target table:
+
+BDP_UK_CARDS.FACT_SUMMARY_SMART_PAY_TRANSACTIONS_DEV
+
+The transformation and aggregation logic are working as expected.
+
+However, I noticed that the join between:
+
+- PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION
+and
+- PAYMENT_GATEWAY_TRANSACTION_STATUS
+
+is currently not matching on TRANSACTION_IDENTIFIER in the DEV environment.
+
+Because of this, the following fields are returning NULL currently:
+- REPORT_DATE
+- REPORT_TIMESTAMP
+- TRANSACTION_STATUS_KEY
+- ERROR_MESSAGE
+
+I checked the sample DEV data and it seems the transaction identifiers between the two tables do not overlap at the moment.
+
+Could you please help confirm:
+1. whether TRANSACTION_IDENTIFIER is the correct join key
+2. or if there is another recommended join logic / composite key for SmartPay BDP?
+
+Once the join logic is confirmed, I should be able to complete the remaining mappings.
+
+Thanks,
+Jibin
