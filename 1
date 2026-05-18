@@ -1,1 +1,24 @@
-DEV sample data between AUTHORIZATION_TRANSACTION and TRANSACTION_STATUS is not aligned; join returns 0 rows. Status-related fields will remain null/UNKNOWN until representative linked data is available.
+SELECT
+    TRANSACTION_STATUS_CODE,
+    CASE
+        WHEN TRANSACTION_STATUS_CODE IN ('PAYMENT_CAPTURED', 'POSTED') THEN 'SUCCESS'
+        WHEN TRANSACTION_STATUS_CODE = 'PAYMENT_DECLINED' THEN 'DECLINED'
+        WHEN TRANSACTION_STATUS_CODE IN (
+            'AUTHORISATION_REQUIRED',
+            'CARD_DETAILS_REQUIRED',
+            'DUPLICATE_POSTED_TRAN',
+            'FAIL',
+            'GATHER_BROWSER_INFO',
+            'PAYMENT_AUTHORISED',
+            'VALIDATION_FAILED',
+            'AUTHENTICATION_REQUIRED',
+            'AUTH_FAIL',
+            'DIARY_NOTE_MADE',
+            'PAYMENT_FAILED',
+            'PAYMENT_CANCELLED'
+        ) THEN 'DROPOUT'
+        ELSE 'UNKNOWN'
+    END AS TRANSACTION_STATUS_KEY,
+    COUNT(*) AS CNT
+FROM FDP_UK_CARDS_DB.PAYMENT_GATEWAY_TRANSACTION_STATUS
+GROUP BY 1, 2;
