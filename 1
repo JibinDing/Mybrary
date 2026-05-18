@@ -1,32 +1,26 @@
-Hi Rinika,
+Progress Update:
 
-I have completed the SmartPay BDP DEV pipeline setup and successfully created + loaded data into the target table:
+- Reviewed and aligned with the latest SmartPay BDP mapping model updates.
+- Analysed FDP source tables:
+  - PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION
+  - PAYMENT_GATEWAY_TRANSACTION_STATUS
+- Developed and validated transformation logic for:
+  - Transaction Channel mapping
+  - Product Group mapping
+  - Transaction Status categorisation
+  - Aggregation measures (volume/value)
+- Created DEV target BDP fact table:
+  - BDP_UK_CARDS.FACT_SUMMARY_SMART_PAY_TRANSACTIONS_DEV
+- Successfully executed INSERT INTO ... SELECT transformation pipeline and validated data load into DEV target table.
+- Current blocker identified:
+  - TRANSACTION_IDENTIFIER between source tables does not currently match in DEV sample data, causing NULL values for:
+    - REPORT_DATE
+    - REPORT_TIMESTAMP
+    - TRANSACTION_STATUS_KEY
+    - ERROR_MESSAGE
+- Raised clarification with Rinika regarding the correct join key / join strategy for SmartPay BDP source tables.
 
-BDP_UK_CARDS.FACT_SUMMARY_SMART_PAY_TRANSACTIONS_DEV
-
-The transformation and aggregation logic are working as expected.
-
-However, I noticed that the join between:
-
-- PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION
-and
-- PAYMENT_GATEWAY_TRANSACTION_STATUS
-
-is currently not matching on TRANSACTION_IDENTIFIER in the DEV environment.
-
-Because of this, the following fields are returning NULL currently:
-- REPORT_DATE
-- REPORT_TIMESTAMP
-- TRANSACTION_STATUS_KEY
-- ERROR_MESSAGE
-
-I checked the sample DEV data and it seems the transaction identifiers between the two tables do not overlap at the moment.
-
-Could you please help confirm:
-1. whether TRANSACTION_IDENTIFIER is the correct join key
-2. or if there is another recommended join logic / composite key for SmartPay BDP?
-
-Once the join logic is confirmed, I should be able to complete the remaining mappings.
-
-Thanks,
-Jibin
+Next Steps:
+- Confirm source table join logic.
+- Finalise status and timestamp mappings.
+- Proceed with stored procedure / task scheduling implementation for hourly BDP refresh.
