@@ -1,0 +1,24 @@
+Completed initial MI AURA data mapping analysis against the existing Aggregator BDP implementation.
+
+Activities completed:
+- Reviewed all currently listed MI AURA attributes in the mapping sheet
+- Analysed existing Aggregator BDP SQL / derivation logic
+- Identified whether each attribute is already available within Aggregator BDP outputs
+- For available attributes:
+  - identified corresponding BDP attribute / column names
+  - captured existing derivation / transformation logic
+  - validated source mappings where applicable
+
+Observations:
+- A subset of MI AURA attributes are already supported within the existing Aggregator BDP structure
+- Some attributes require additional lineage review across Aggregator source tables / transformation layers before final mapping can be confirmed
+- Newly introduced MI AURA attributes are currently not available within existing Aggregator BDP outputs and may require:
+  - new source onboarding
+  - additional derivation logic
+  - BDP model enhancements
+
+Next steps:
+- Continue lineage review for unresolved attributes
+- Confirm availability / derivation feasibility with SMEs where required
+- Update mapping sheet with finalised transformation logic and gap analysis
+- Assess implementation impact for newly introduced attributes not currently present in Aggregator BDP
