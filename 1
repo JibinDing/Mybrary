@@ -1,0 +1,24 @@
+Please review the existing Cards Aggregator SQL / deployment scripts and identify:
+
+1. Whether any Snowflake TASK is used for refresh scheduling
+2. The actual refresh cadence / schedule if defined
+3. Whether the pipeline uses:
+   - full refresh
+   - insert overwrite
+   - incremental load
+   - merge strategy
+4. Any partitioning / clustering strategy used
+5. Which table/procedure acts as the final refresh entry point
+
+Please specifically look for:
+- CREATE TASK
+- SCHEDULE
+- CRON
+- INSERT OVERWRITE
+- MERGE
+- CLUSTER BY
+- PROCEDURE calls
+- orchestration logic
+
+Goal:
+Understand how the existing Aggregator production refresh process works so we can align the SmartPay BDP implementation with the same pattern.
