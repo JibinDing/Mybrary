@@ -1,0 +1,35 @@
+Please review the existing Cards Aggregator BDP SQL / stored procedures / mapping logic and help identify whether the following business attribute is already available in the Aggregator BDP output.
+
+Business Attribute:
+<ATTRIBUTE_NAME>
+
+Please analyse and provide:
+
+1. Whether this attribute already exists in:
+   - Aggregator BDP output tables
+   - CARDS_AGGREGATOR_MULTIQUOTE
+   - summary / downstream outputs
+   - derived views or transformations
+
+2. If available:
+   - exact output column name
+   - source table
+   - source column
+   - derivation / transformation logic
+   - where it is created in the SQL flow
+
+3. If not directly available:
+   - closest equivalent field currently available
+   - likely source table / source column where this attribute may exist
+   - recommended derivation approach if applicable
+
+4. Also identify:
+   - any CASE statements
+   - aliases
+   - mappings
+   - joins
+   - intermediate CTEs
+   related to this attribute.
+
+Goal:
+Understand whether this business attribute is already supported in the existing Aggregator BDP implementation, and determine its technical lineage and derivation logic.
