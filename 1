@@ -1,0 +1,16 @@
+Hi Nihal,
+I’ve started looking into the data refresh approach based on the existing aggregator pattern.
+
+Current understanding is:
+
+* existing aggregator pipelines are using scheduled task-based refresh
+* mainly full refresh / insert overwrite pattern
+* SmartPay BDP may also need partitioning / reporting date based strategy depending on final approved model
+
+I’m currently reviewing:
+
+* task scheduling approach
+* partitioning / clustering options
+* incremental vs full refresh suitability
+
+Will align further once the final SmartPay model and deployment approach are confirmed.
