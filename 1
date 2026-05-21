@@ -1,0 +1,26 @@
+Please re-check the attribute "Account creation date" in the existing Cards Aggregator BDP SQL.
+
+Important:
+Do NOT treat APPLICATION_CREATED_DATE, CASE_CREATION_DATE, or application initiated date as Account Creation Date unless the SQL/business logic explicitly confirms they represent the account creation/booked account date.
+
+I need to identify the field that represents:
+"Date when the account was actually created / booked / opened", not when the application was created.
+
+Please search specifically for fields or logic related to:
+- account creation date
+- account opened date
+- booked account date
+- booked date
+- account number creation
+- FULL_APPLICATION_STATUS_CODE = 'COMPLETE'
+- final booked account / completed application date
+
+Please provide:
+1. Whether Account Creation Date is directly available in Aggregator BDP
+2. Exact BDP output column name, if available
+3. Source table and source column
+4. Transformation logic
+5. If not directly available, the closest available proxy and why it is only a proxy
+
+Goal:
+Confirm whether the MI AURA "Account creation date" requirement is truly supported in BDP, and avoid confusing it with application created date.
