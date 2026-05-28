@@ -1,0 +1,43 @@
+WITH txn_timeline AS (
+    SELECT
+        a.TRANSACTION_IDENTIFIER,
+        MIN(a.SOURCE_INSERT_TIMESTAMP) AS auth_first_ts,
+        MIN(
+            CASE
+                WHEN s.TRANSACTION_STATUS_CODE IN (
+                    'PAYMENT_CAPTURED',
+                    'POSTED',
+                    'PAYMENT_DECLINED',
+                    'AUTHORISATION_REQUIRED',
+                    'CARD_DETAILS_REQUIRED',
+                    'PAYMENT_AUTHORISED',
+                    'AUTHENTICATION_REQUIRED',
+                    'CARD_DETAILS',
+                    'FAIL',
+                    'AUTH_FAIL',
+                    'PAYMENT_FAILED',
+                    'PAYMENT_CANCELLED'
+                )
+                THEN s.SOURCE_CHANGE_TIMESTAMP
+            END
+        ) AS terminal_status_ts
+    FROM FDP_UK_CARDS_DB.PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION a
+    JOIN FDP_UK_CARDS_DB.PAYMENT_GATEWAY_TRANSACTION_STATUS s
+        ON a.TRANSACTION_IDENTIFIER = s.TRANSACTION_IDENTIFIER
+    GROUP BY a.TRANSACTION_IDENTIFIER
+),
+valid_txn AS (
+    SELECT
+        *,
+        DATEDIFF('minute', auth_first_ts, terminal_status_ts) AS completion_minutes
+    FROM txn_timeline
+    WHERE terminal_status_ts IS NOT NULL
+      AND terminal_status_ts >= auth_first_ts
+)
+SELECT
+    COUNT(*) AS valid_transactions,
+    MAX(completion_minutes) AS max_completion_minutes,
+    AVG(completion_minutes) AS avg_completion_minutes,
+    PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY completion_minutes) AS p95_completion_minutes,
+    PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY completion_minutes) AS p99_completion_minutes
+FROM valid_txn;
