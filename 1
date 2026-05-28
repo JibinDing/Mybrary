@@ -3,40 +3,43 @@ WITH smartpay_txn AS (
     FROM e_smartpay_db.to_txn_aud
     WHERE txn_prs_cde IN (
         'DPNGCB', 'NGCBRF',
-        'RL_BLD', 'RH_BLD',
-        'FL_BLD', 'FH_BLD',
-        'IH_BLD', 'IL_BLD'
+        'RL_BLD', 'RH_BLD', 'FL_BLD',
+        'FH_BLD', 'IH_BLD', 'IL_BLD'
     )
 ),
-
 txn_timeline AS (
     SELECT
         s.txn_ref,
         MIN(s.ins_tmp) AS first_status_ts,
         MAX(s.ins_tmp) AS last_status_ts,
-
-        (
-            unix_timestamp(MAX(s.ins_tmp))
-            - unix_timestamp(MIN(s.ins_tmp))
-        ) / 60 AS completion_minutes
-
+        (unix_timestamp(MAX(s.ins_tmp)) - unix_timestamp(MIN(s.ins_tmp))) / 60 AS completion_minutes
     FROM e_smartpay_db.to_txn_aud_sts s
     JOIN smartpay_txn t
         ON s.txn_ref = t.txn_ref
     GROUP BY s.txn_ref
 )
-
 SELECT
-    COUNT(*) AS txn_count,
-
-    MAX(completion_minutes) AS max_completion_minutes,
-
-    AVG(completion_minutes) AS avg_completion_minutes,
-
-    percentile(completion_minutes, 0.95)
-        AS p95_completion_minutes,
-
-    percentile(completion_minutes, 0.99)
-        AS p99_completion_minutes
-
-FROM txn_timeline;
+    CASE
+        WHEN completion_minutes <= 5 THEN '00_<=5 mins'
+        WHEN completion_minutes <= 15 THEN '01_<=15 mins'
+        WHEN completion_minutes <= 30 THEN '02_<=30 mins'
+        WHEN completion_minutes <= 60 THEN '03_<=1 hour'
+        WHEN completion_minutes <= 120 THEN '04_<=2 hours'
+        WHEN completion_minutes <= 240 THEN '05_<=4 hours'
+        WHEN completion_minutes <= 1440 THEN '06_<=1 day'
+        ELSE '07_>1 day'
+    END AS completion_bucket,
+    COUNT(*) AS txn_count
+FROM txn_timeline
+GROUP BY
+    CASE
+        WHEN completion_minutes <= 5 THEN '00_<=5 mins'
+        WHEN completion_minutes <= 15 THEN '01_<=15 mins'
+        WHEN completion_minutes <= 30 THEN '02_<=30 mins'
+        WHEN completion_minutes <= 60 THEN '03_<=1 hour'
+        WHEN completion_minutes <= 120 THEN '04_<=2 hours'
+        WHEN completion_minutes <= 240 THEN '05_<=4 hours'
+        WHEN completion_minutes <= 1440 THEN '06_<=1 day'
+        ELSE '07_>1 day'
+    END
+ORDER BY completion_bucket;
