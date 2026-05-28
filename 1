@@ -1,0 +1,33 @@
+WITH smartpay_txn AS (
+    SELECT DISTINCT txn_ref
+    FROM e_smartpay_db.to_txn_aud
+    WHERE txn_prs_cde IN (
+        'DPNGCB', 'NGCBRF',
+        'RL_BLD', 'RH_BLD',
+        'FL_BLD', 'FH_BLD',
+        'IH_BLD', 'IL_BLD'
+    )
+),
+
+txn_timeline AS (
+    SELECT
+        s.txn_ref,
+        MIN(s.ins_tmp) AS first_status_ts,
+        MAX(s.ins_tmp) AS last_status_ts,
+
+        (
+            unix_timestamp(MAX(s.ins_tmp))
+            - unix_timestamp(MIN(s.ins_tmp))
+        ) / 60 AS completion_minutes
+
+    FROM e_smartpay_db.to_txn_aud_sts s
+    JOIN smartpay_txn t
+        ON s.txn_ref = t.txn_ref
+    GROUP BY s.txn_ref
+)
+
+SELECT *
+FROM txn_timeline
+WHERE completion_minutes > 1440
+ORDER BY completion_minutes DESC
+LIMIT 100;
