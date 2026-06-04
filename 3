@@ -1,9 +1,38 @@
 SELECT
-    id,
-    triumphrefno,
-    triumphrefno2,
-    triumphrefno_stg_id,
-    triumphrefno2_stg_id,
-    aggrefno
-FROM if110_vec_productapp
-WHERE id = 337028915;
+    COUNT(*) total_cnt,
+
+    SUM(
+        CASE
+            WHEN triumphrefno IS NULL
+             AND triumphrefno2 IS NULL
+             AND triumphrefno_stg_id IS NULL
+             AND triumphrefno2_stg_id IS NULL
+            THEN 1
+            ELSE 0
+        END
+    ) null_triumph_cnt
+
+FROM if110_vec_productapp;
+
+
+WITH missing_apps AS
+(
+   ---- 你的88k query
+)
+SELECT
+    COUNT(*) total_missing,
+
+    SUM(
+        CASE
+            WHEN p.triumphrefno IS NULL
+             AND p.triumphrefno2 IS NULL
+             AND p.triumphrefno_stg_id IS NULL
+             AND p.triumphrefno2_stg_id IS NULL
+            THEN 1
+            ELSE 0
+        END
+    ) no_triumph_mapping
+
+FROM missing_apps m
+LEFT JOIN if110_vec_productapp p
+       ON m.application_number = p.id;
