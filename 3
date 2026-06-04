@@ -1,0 +1,14 @@
+Hi Rinika,
+
+I sampled 20 applications from the population where:
+
+- Full Application Status = COMPLETE
+- Account Identifier is NULL in FDP Credit Card Account
+
+I checked IF004_VECTUS using the application number (THEKEY).
+
+All 20 sampled records were present in IF004_VECTUS, however ACCNO was populated as 0000000000000000 rather than a valid account number.
+
+This suggests the gap is not limited to the FDP Credit Card Account join, as IF004_VECTUS also does not appear to hold a valid account number for these applications.
+
+Next step would be to understand whether these COMPLETE applications genuinely resulted in booked accounts or whether COMPLETE status does not necessarily imply account creation.
