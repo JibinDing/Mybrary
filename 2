@@ -1,0 +1,36 @@
+Hi Rinika,
+
+Please find below a summary of the transaction completion time analysis based on:
+
+• PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION
+• PAYMENT_GATEWAY_TRANSACTION_STATUS
+
+The analysis measures the elapsed time between the first transaction event and the final transaction status.
+
+Summary
+
+Transactions analysed: 6,852,235
+
+Average completion time:
+1.04 minutes
+
+Maximum completion time:
+97.67 minutes
+
+Completion time distribution:
+
+<= 5 minutes      : 10,247,922
+<= 15 minutes     : 32,342
+<= 30 minutes     : 10,920
+<= 1 hour         : 20,987
+<= 2 hours        : 5,121
+<= 4 hours        : 103
+<= 1 day          : 52
+> 1 day           : 5,632
+
+During the analysis, a small number of anomalous transactions were identified where transaction status records continued to appear several months after the initial transaction date. These were reviewed separately as outliers.
+
+Please let me know if you would like any additional percentile analysis (P50/P95/P99) or further breakdown by transaction type.
+
+Kind regards,
+Jibin
