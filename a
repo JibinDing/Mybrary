@@ -1,0 +1,26 @@
+Progress Update – SmartPay Hourly Refresh Enhancement
+
+* Updated SmartPay solution to support hourly refresh requirement (previously based on 120-hour incremental window).
+* Implemented changes across DDL, History Load, Refresh Stored Procedure, and Task definitions.
+* Updated metric identifier from SMARTPAY_TRANSACTION to agreed value SMTPYTXN0001.
+* Added reporting-only status mappings:
+    * REPORTING_ONLY_FAIL
+    * REPORTING_ONLY_AUTH_FAIL
+    * REPORTING_ONLY_PAYMENT_FAILED
+    * REPORTING_ONLY_PAYMENT_CANCELLED
+* Modified refresh logic to use latest transaction status based on SOURCE_CHANGE_TIMESTAMP.
+* Updated task schedule to hourly execution (USING CRON 0 * * * * Europe/London) as requested.
+
+DEV Testing Completed
+
+* Created DEV test table and deployed updated stored procedure.
+* Successfully executed History Load and Refresh processes.
+* Validated data population and metric outputs.
+* Confirmed metric identifier is populated as SMTPYTXN0001.
+* Verified reporting-only status classifications are generated correctly.
+* Created and enabled DEV hourly task.
+* Confirmed task schedule aligns with hourly refresh requirement and task history is being recorded.
+* Testing evidence captured and shared.
+
+Current Status
+DEV implementation and testing completed successfully. Awaiting confirmation on production deployment.
