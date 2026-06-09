@@ -1,5 +1,0 @@
-Thanks Rajat. I can use the FDP TRANSACTION_STATUS_KEY directly for TRANSACTION_STATUS_KEY.
-
-For PRODUCT_GROUP_KEY, I will check the source system key mapping for NGCB/Triumph.
-
-One question: we currently derive reporting categories such as SUCCESS, DECLINED, DROPOUT and REPORTING_ONLY_* for MI reporting. If TRANSACTION_STATUS_KEY needs to hold only the source key, should these derived categories be stored elsewhere, or should they be handled downstream via reference mapping?
