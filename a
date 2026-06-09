@@ -1,0 +1,9 @@
+Hi Rajat,
+
+Quick question on the SmartPay implementation.
+
+Rinika has asked whether PRODUCT_GROUP_KEY and TRANSACTION_STATUS_KEY in FACT_SUMMARY_SMART_PAY_TRANSACTIONS should contain reference keys rather than values such as ‘TRIUMPH’, ‘NGCB’, ‘SUCCESS’, ‘DECLINED’, etc.
+
+Is there an existing Cards reference table that we should be using for these mappings?
+
+Thanks.
