@@ -1,9 +1,4 @@
-Thanks Rajat.
-
-I found the SOURCE SYSTEM mappings in DIM_REFERENCE:
-- Triumph = 10001031
-- NGCB = 10001090
-
-Could you also advise which reference table / key mapping should be used for SmartPay transaction statuses such as SUCCESS, DECLINED, DROPOUT and REPORTING_ONLY_* ?
-
-I couldn't find these values in DIM_REFERENCE.
+SELECT *
+FROM BDP_UK_CARDS.DIM_REFERENCE
+WHERE UPPER(REFERENCE_DESCRIPTION) LIKE '%SUCCESS%'
+   OR UPPER(REFERENCE_DETAIL_NAME) LIKE '%SUCCESS%';
