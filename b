@@ -1,1 +1,0 @@
-describe e_casmart_db.if110_vec_productapp;
