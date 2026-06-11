@@ -1,0 +1,1 @@
+I reviewed a sample of the affected applications. They exist in IF004 and ProductApp and are marked COMPLETE, but no corresponding account could be found in NGCB Account Main. The ProductApp records also have NULL Triumph references. At this stage it looks more like the applications never resulted in an account being available downstream, rather than an FTP mapping issue.
