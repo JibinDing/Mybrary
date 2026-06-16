@@ -1,1 +1,0 @@
-Hi Rajat, I found application_main under e_ngcb_apply_db, but I cannot see check_provider_ref_num in that table. I can see fields like applicationid, referenceid, pclipreference and cd_accountnumber. Could you confirm which field maps to the CAS application number, or whether check_provider_ref_num is in another table/schema?
