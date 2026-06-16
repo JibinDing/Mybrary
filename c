@@ -1,1 +1,1 @@
-describe e_casmart_db.application_main;
+show tables like '*application*';
