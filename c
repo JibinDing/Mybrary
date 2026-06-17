@@ -1,2 +1,1 @@
-SELECT COUNT(*)
-FROM BDP_UK_CARDS.FACT_SMARTPAY_TRANSACTION_SUMMARY;
+changes I made today: I updated the logic to derive Product Group Key and Transaction Status Key by joining to the DIM_REFERENCE table instead of hardcoding the reference keys, with COALESCE(..., -99) as the fallback. I also made the hourly refresh more robust by calculating a dynamic reload start point based on the latest REPORT_HOUR in the target table rather than always reloading a fixed 120-hour window. I’ve tested the history load, refresh procedure, and scheduled task, and everything is working successfully.
