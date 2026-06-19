@@ -1,1 +1,0 @@
-Yes, based on the evidence so far, it appears to be an FDP application-to-account mapping (join key) issue rather than missing data in ACCOUNT_MAIN.
