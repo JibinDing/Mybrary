@@ -1,0 +1,1 @@
+Could you please share the RTB handover template or a sample document from another BDP/FDP implementation? It would help me understand the level of detail expected for the SmartPay handover.
