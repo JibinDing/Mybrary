@@ -1,1 +1,0 @@
-I have identified the FDP join path from account to application/case. Starting from CREDIT_CARD_ACCOUNT, the relationship can be established via APPLICATION_IDENTIFIER → APPLICATION_NUMBER → CASE_NUMBER using CREDIT_CARD_APPLICATION and CREDIT_CARD_APPLICATION_CASE. I have validated this against the sample accounts you provided.
