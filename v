@@ -1,0 +1,7 @@
+SELECT
+    table_name,
+    column_name
+FROM PROD_BUK_SNSVC0073314_CARDS_BUSINESS_DB.INFORMATION_SCHEMA.COLUMNS
+WHERE table_schema = 'FDP_UK_CARDS_DB'
+  AND UPPER(column_name) LIKE '%APPLICATION%'
+ORDER BY table_name, column_name;
