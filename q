@@ -1,1 +1,0 @@
-I will make sure I meet the office attendance expectation going forward and will increase my office attendance over this week and next week.
