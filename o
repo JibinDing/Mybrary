@@ -1,0 +1,41 @@
+I need you to analyse the existing Aggregators BDP code and compare the current Acquisition Segment 2 / product classification logic against the new CAS SME proposed mapping below.
+
+Please do not change the code yet. First provide an analysis only.
+
+Current BDP logic appears to derive Acquisition Segment 2 from Requested_Product_Class_Code using this mapping:
+- 'T' or 'A' -> 'Forward'
+- 'B' or 'E' -> 'Better Together'
+- 'K' -> 'New to Prime'
+- 'L' -> 'Platinum BT Long'
+- 'M' -> 'Platinum BT MID'
+- 'S' -> 'SIMPLICITY'
+- 'T' -> 'Platinum BT SHORT'
+- 'P' -> 'COMBO'
+- 'X' -> 'REWARDS'
+- 'U' -> 'AMAZON'
+- 'V' -> 'AMAZON WINBACK'
+- otherwise -> 'UNKNOWN'
+
+New CAS SME proposed mapping:
+- Requested_Product_Class_Code in ('U') -> 'Amazon'
+- Requested_Product_Class_Code in ('V') -> 'Amazon Winback'
+- Source_Product_Code in ('26','86') -> 'Initial Forward'
+- Requested_Product_Class_Code in ('P') -> 'Platinum Purchase/Combo'
+- Requested_Product_Class_Code in ('X') -> 'Rewards'
+- Source_Product_Code in ('33') and Requested_Product_Class_Code in ('L') -> 'Platinum BT Long'
+- Source_Product_Code in ('33') and Requested_Product_Class_Code in ('M') -> 'Platinum BT Mid'
+- Source_Product_Code in ('33') and Requested_Product_Class_Code in ('T') -> 'Platinum BT Short'
+- Source_Product_Code in ('91') -> 'Avios'
+- Source_Product_Code in ('92') -> 'Avios Plus'
+- otherwise -> 'UNKNOWN'
+
+Please analyse the existing code and return:
+1. Where the current Acquisition Segment 2 / product classification logic is implemented.
+2. Which input columns are currently used.
+3. Whether Source_Product_Code is already available in the current code path.
+4. The exact difference between current logic and the proposed CAS SME logic.
+5. Which output values would potentially change.
+6. Whether the current logic has any conflict or duplicate condition, especially around Requested_Product_Class_Code = 'T'.
+7. What code changes would be required to implement the new mapping.
+8. Any downstream impact on existing Aggregators dashboard outputs.
+9. A suggested SQL CASE WHEN expression for the proposed logic, but do not apply it yet.
