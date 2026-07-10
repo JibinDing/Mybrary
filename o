@@ -1,0 +1,31 @@
+Correction: we are not changing the Aggregators SQL yet.
+
+Please generate a standalone validation query only.
+
+Goal:
+Starting from the existing Aggregators pipeline output / FQ_BASE level, validate whether accepted applications can be linked to FDP account numbers.
+
+Use the existing pipeline only as a source CTE. Do not modify any existing CTE logic.
+
+The validation query should:
+1. Take the short application id from the Aggregators pipeline.
+2. Join to application_results_sum_caselg_main to map:
+   short application id -> long NGCB application id.
+3. Join to FDP_UK_CARDS_DB.CREDIT_CARD_APPLICATION using the long application id.
+4. Join to FDP_UK_CARDS_DB.CREDIT_CARD_ACCOUNT using APPLICATION_IDENTIFIER.
+5. Return summary counts:
+   - total accepted applications
+   - accepted applications with account number
+   - accepted applications without account number
+   - percentage with account number
+6. Also provide a sample detail query showing:
+   short_application_id,
+   long_application_id,
+   application_identifier,
+   account_number,
+   final application status.
+
+Do not suggest code changes.
+Do not add fields to downstream CTEs.
+Do not rewrite the pipeline.
+Return standalone SQL only.
