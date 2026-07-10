@@ -1,0 +1,68 @@
+I need your help to analyse an existing Aggregators SQL pipeline.
+
+Background:
+
+The business requirement has changed.
+
+Currently, the Aggregators pipeline stores a SHORT application identifier (Application ID / Case ID).
+
+We have already validated the following mapping path:
+
+Aggregator short application id
+    ->
+application_results_sum_caseIg_main.applicationid
+    ->
+long NGCB application id
+    ->
+FDP_UK_CARDS_DB.CREDIT_CARD_APPLICATION.APPLICATION_NUMBER
+    ->
+FDP_UK_CARDS_DB.CREDIT_CARD_APPLICATION.APPLICATION_IDENTIFIER
+    ->
+FDP_UK_CARDS_DB.CREDIT_CARD_ACCOUNT.APPLICATION_IDENTIFIER
+    ->
+ACCOUNT_NUMBER
+
+This mapping has already been validated using sample data.
+
+The new business requirement is to identify Booked Accounts based on the existence of an Account Number rather than simply Accepted applications.
+
+Your task is NOT to rewrite the whole SQL.
+
+Please analyse the existing Aggregators SQL and answer the following:
+
+1. Where in the pipeline is the short application id first available?
+
+2. Which CTE would be the best place to introduce the mapping from
+   short application id
+   ->
+   long application id
+   using application_results_sum_caseIg_main?
+
+3. Trace the downstream CTE flow after that point and identify the minimum number of CTEs that would need to carry the new fields.
+
+4. Suggest where to join CREDIT_CARD_APPLICATION.
+
+5. Suggest where to join CREDIT_CARD_ACCOUNT.
+
+6. Explain whether it is better to:
+   - perform both joins near the end of the pipeline, or
+   - introduce them earlier and carry ACCOUNT_NUMBER through the remaining CTEs.
+
+7. Identify any existing joins that already contain APPLICATION_IDENTIFIER, APPLICATION_NUMBER, or ACCOUNT_NUMBER so duplicate joins can be avoided.
+
+8. Produce a recommended implementation plan only.
+Do NOT modify the SQL yet.
+
+For each recommendation, include:
+- CTE name
+- why that location is appropriate
+- new columns to carry forward
+- possible performance considerations
+
+Finally, tell me exactly where the validation query should be inserted so that we can calculate:
+
+- Accepted applications
+- Accepted applications with Account Number
+- Accepted applications without Account Number
+
+without affecting existing business logic.
