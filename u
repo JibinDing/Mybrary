@@ -1,0 +1,12 @@
+SELECT
+    table_name,
+    column_name
+FROM FDP_UK_CARDS_DB.INFORMATION_SCHEMA.COLUMNS
+WHERE UPPER(column_name) IN (
+    'APPLICATION_NUMBER',
+    'APPLICATION_IDENTIFIER',
+    'CASE_NUMBER',
+    'CASE_IDENTIFIER',
+    'CASE_ID'
+)
+ORDER BY table_name, column_name;
