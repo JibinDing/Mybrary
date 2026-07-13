@@ -1,0 +1,9 @@
+We investigated the FDP application lineage for both Triumph and NGCB application identifiers.
+
+Findings:
+
+* CREDIT_CARD_APPLICATION_OUTCOME contains both Triumph (10001015) and NGCB (10001090) application identifiers.
+* CREDIT_CARD_APPLICATION_CASE only contains Triumph (10001015) application identifiers.
+* No NGCB (10001090) application identifiers are present in CREDIT_CARD_APPLICATION_CASE.
+* Therefore, NGCB applications cannot be mapped directly from FDP application tables to Credit Card Account.
+* This confirms an FDP modelling gap for NGCB application mapping and explains why the E-layer mapping is currently required.
