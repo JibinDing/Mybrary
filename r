@@ -1,14 +1,9 @@
-In CREDIT_CARD_APPLICATION_DECISION_OUTCOME, find the field that should populate the new BDP PURCHASE_RATE.
-
-Search for:
-- APR_PERCENTAGE_APPLIED_AMOUNT
-- ANNUAL_PERCENTAGE_RATE
-- purchase rate
+Trace ORIGIN_CODE through the full SQL.
 
 Return only:
-1. Exact source column name
-2. Its data type if shown
-3. The SELECT line where current APR is populated
-4. Whether the new Purchase Rate source is already selected
+1. Every place ORIGIN_CODE is created or selected
+2. Its source expression in each place
+3. Whether CHANNEL_CODE AS ORIGIN_CODE reaches BASE_SUM_FINAL
+4. Whether another approved origin attribute name exists
 
 No explanation.
