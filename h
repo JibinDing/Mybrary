@@ -1,0 +1,1 @@
+Trace the lineage of NEW_ACQ_SEGMENT2 across this entire SQL file and tell me exactly where it disappears. Show me the exact SELECT statement that needs to be updated.
