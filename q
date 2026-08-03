@@ -1,0 +1,38 @@
+CREATE OR REPLACE TABLE <DATABASE>.<SCHEMA>.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+(
+    REPORT_DATE                              DATE            NOT NULL,
+    APPLICATION_CREATED_DATE                 DATE            NOT NULL,
+    APPLICATION_DECISION_DATE                DATE            NOT NULL,
+
+    PRE_APPROVED_INDICATOR                   CHAR(1)         NOT NULL,
+    VOID_PRE_APPROVED_INDICATOR              CHAR(1)         NOT NULL,
+
+    PRODUCT_RISK_OVERRIDE_INDICATOR          CHAR(1)         NOT NULL,
+    CREDIT_RISK_OVERRIDE_INDICATOR           CHAR(1)         NOT NULL,
+
+    BALANCE_TRANSFER_INTENT_INDICATOR        CHAR(1)         NOT NULL,
+    CARD_INTENT_PURPOSE_CODE                 CHAR(3)         NOT NULL,
+
+    MULTIQUOTE_INDICATOR                     CHAR(1)         NOT NULL,
+
+    REQUESTED_PRODUCT_1_CODE                 VARCHAR(20)     NOT NULL,
+    REQUESTED_PRODUCT_2_CODE                 VARCHAR(20)     NOT NULL,
+
+    INCOME_VALIDATION_REQUIRED_INDICATOR     CHAR(1)         NOT NULL,
+
+    APPLICATION_REASON_CODE                  VARCHAR(20)     NOT NULL,
+    QUOTE_REASON_CODE                        VARCHAR(20)     NOT NULL,
+    QUOTE_DECISION_CODE                      VARCHAR(20)     NOT NULL,
+
+    ORIGIN_CODE                              VARCHAR(20)     NOT NULL,
+
+    RISK_SEGMENT_CODE                        DECIMAL(17,6)   NOT NULL,
+    GEN16_OM_PRIME_SCORE                     DECIMAL(17,6)   NOT NULL,
+
+    AGGREGATOR_PARTNER_CODE                  VARCHAR(20)     NOT NULL,
+
+    BALANCE_TRANSFER_REQUEST_BAND            VARCHAR(20)     NOT NULL,
+    GUARANTEED_BALANCE_TRANSFER_INDICATOR    CHAR(1)         NOT NULL
+
+    -- 后面的字段继续往下写……
+);
