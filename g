@@ -1,0 +1,2 @@
+Tableau shows 3468 Accepted Accounts for Application Decision Date = 18 Aug 2026. The dashboard is sourced from the final BDP application summary table and uses APPLICATION_ACCEPT_COUNT.
+Please give me the SQL to retrieve the underlying APPLICATION_IDENTIFIER / CASE_NUMBER for exactly those 3468 accepted accounts, using the existing aggregator v2.0 logic and final BDP model.
