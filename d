@@ -1,12 +1,1 @@
-SELECT
-    AGGREGATOR_INDICATOR,
-    CHANNEL_LEVEL_1,
-    SUM(BOOKED_ACCOUNTS) AS BOOKED_ACCOUNTS
-FROM PROD_BUK_SNSVC0073314_CARDS_BUSINESS_DB.BDP_UK_CARDS.CARDS_AGGREGATOR_MULTIQUOTE
-WHERE APPLICATION_DECISION_DATE = '2026-08-18'
-GROUP BY
-    AGGREGATOR_INDICATOR,
-    CHANNEL_LEVEL_1
-ORDER BY
-    CHANNEL_LEVEL_1,
-    AGGREGATOR_INDICATOR;
+Direct Channel Sales reconciles exactly at 1,730. Third Party Sales shows a one-account variance, with 1,738 in Tableau versus 1,737 in BDP, resulting in an overall variance of one accepted/booked account.
