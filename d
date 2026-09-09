@@ -1,1 +1,0 @@
-Direct Channel Sales reconciles exactly at 1,730. Third Party Sales shows a one-account variance, with 1,738 in Tableau versus 1,737 in BDP, resulting in an overall variance of one accepted/booked account.
