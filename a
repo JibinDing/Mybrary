@@ -1,1 +1,0 @@
-PASS – NULL error descriptions were reviewed. NULLs are expected for statuses where no source error description exists. For statuses requiring a fallback error description, the transformation correctly populates the field using COALESCE(ERROR_DESCRIPTION, TRANSACTION_STATUS_CODE). No NULLs were observed for the DROPOUT mapping.
