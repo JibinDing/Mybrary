@@ -1,1 +1,0 @@
-FAIL / defect identified — AUTHENTICATION_DETAILS is present in the source but is not handled by the transaction status CASE statement, resulting in TRANSACTION_STATUS_KEY = -99.
