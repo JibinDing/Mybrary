@@ -1,0 +1,4 @@
+I checked the join cardinality for the current reload window. There are 495,938 transactions in latest_status and the row count remains exactly 495,938 after joining to the authorisation table, so the join is not multiplying records. 393,170 transactions match the SmartPay authorisation scope. So the BDP join itself should not be inflating the volumes.
+
+
+If the FDP source has not changed since the 11AM run, yes — the SP should be idempotent for that source snapshot because it deletes the same reload window and rebuilds it, and we have now confirmed the join is not multiplying rows. If FDP has received further updates since 11AM, the volumes can legitimately change.
