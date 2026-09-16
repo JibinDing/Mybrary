@@ -1,3 +1,0 @@
-I think we found the cause. There are 36,544 transactions where multiple records have the same latest SOURCE_CHANGE_TIMESTAMP but different statuses. Our current latest-status logic only orders by SOURCE_CHANGE_TIMESTAMP, so the selected row can be non-deterministic.
-
-I tested adding SOURCE_INSERT_TIMESTAMP DESC as the second ordering criterion and it resolves all of the ties — there are 0 transactions still tied. I think we should update both the Day-0 and SP latest-status logic accordingly and then rerun the stability test.
