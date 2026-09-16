@@ -1,2 +1,0 @@
-I checked the status lifecycle across SmartPay transactions. The maximum time from the first to the latest status is only 21 hours, and there are no transactions over 24 hours, so the 120-hour reload window looks sufficient based on the current FDP data.
-This suggests the changes we are seeing for 9 Sep are more likely related to FDP refresh / late-arriving data rather than transactions taking more than a day to progress through stages.
