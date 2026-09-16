@@ -1,5 +1,31 @@
-I think there is another possible explanation. The 9 Sep figures can change even if today’s FDP load did not bring in any new records with a 9 Sep source change timestamp.
+WITH sep9_txns AS (
+    SELECT DISTINCT TRANSACTION_IDENTIFIER
+    FROM FDP_UK_CARDS_DB.PAYMENT_GATEWAY_TRANSACTION_STATUS
+    WHERE SOURCE_CHANGE_TIMESTAMP >= '2026-09-09 01:00:00'
+      AND SOURCE_CHANGE_TIMESTAMP <  '2026-09-10 00:00:00'
+),
 
-Since the BDP logic takes the latest status per transaction, a transaction that had a status on 9 Sep may have progressed to another status on 10 Sep. Once that later status is available in FDP, the reload will use the later status and the transaction can move out of the original 9 Sep hourly bucket.
+latest_status AS (
+    SELECT
+        s.TRANSACTION_IDENTIFIER,
+        s.TRANSACTION_STATUS_CODE,
+        s.SOURCE_CHANGE_TIMESTAMP,
+        s.SOURCE_INSERT_TIMESTAMP,
+        s.DW_LOD_TMP
+    FROM FDP_UK_CARDS_DB.PAYMENT_GATEWAY_TRANSACTION_STATUS s
+    JOIN sep9_txns t
+      ON s.TRANSACTION_IDENTIFIER = t.TRANSACTION_IDENTIFIER
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY s.TRANSACTION_IDENTIFIER
+        ORDER BY s.SOURCE_CHANGE_TIMESTAMP DESC
+    ) = 1
+)
 
-We also found that the maximum status lifecycle is 21 hours, so cross-day movement is possible. I can check the transaction IDs that had a 9 Sep status but whose latest status is on 10 Sep to confirm this.
+SELECT
+    CAST(SOURCE_CHANGE_TIMESTAMP AS DATE) AS LATEST_STATUS_DATE,
+    CAST(DW_LOD_TMP AS DATE) AS FDP_LOAD_DATE,
+    COUNT(*) AS TRANSACTION_COUNT
+FROM latest_status
+WHERE SOURCE_CHANGE_TIMESTAMP >= '2026-09-10 00:00:00'
+GROUP BY 1,2
+ORDER BY 1,2;
