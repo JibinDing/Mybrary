@@ -1,1 +1,0 @@
-Yes, that makes sense. Since FDP appears to refresh once daily, rerunning the Day-0 load now should give us a good idempotency/stability check, assuming the source has not changed since the 11AM run. I agree we should add a targeted delete before the Day-0 insert, using the same Day-0 date range, then compare the 9–15 Sep BDP volumes before and after the reload.
