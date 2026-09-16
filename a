@@ -1,0 +1,1 @@
+It should be from 09 Sep 01:00 onwards. The SP takes the previous MAX(REPORT_HOUR) (14 Sep 01:00) and subtracts 120 hours, then deletes and reloads everything from that point.
