@@ -1,0 +1,5 @@
+I think there is another possible explanation. The 9 Sep figures can change even if today’s FDP load did not bring in any new records with a 9 Sep source change timestamp.
+
+Since the BDP logic takes the latest status per transaction, a transaction that had a status on 9 Sep may have progressed to another status on 10 Sep. Once that later status is available in FDP, the reload will use the later status and the transaction can move out of the original 9 Sep hourly bucket.
+
+We also found that the maximum status lifecycle is 21 hours, so cross-day movement is possible. I can check the transaction IDs that had a 9 Sep status but whose latest status is on 10 Sep to confirm this.
