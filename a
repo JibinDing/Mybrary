@@ -1,1 +1,0 @@
-TRANSACTION_IDENTIFIER is already used in the PARTITION BY, so ordering by it again would not change the result. I think the deterministic ordering should be by SOURCE_CHANGE_TIMESTAMP DESC, then SOURCE_INSERT_TIMESTAMP DESC as the tie-breaker. We tested this and there were no remaining ties.
