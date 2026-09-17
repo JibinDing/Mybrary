@@ -1,0 +1,31 @@
+Hi all, during SmartPay PROD testing we found two transaction IDs which are present in FDP_UK_CARDS_DB.PAYMENT_GATEWAY_TRANSACTION_STATUS, but no corresponding records are available in FDP_UK_CARDS_DB.PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION:
+
+000bc4c2-ab16-4bf8-98d2-84c04e36b46c
+0099d822-e5b0-4bde-a9ad-d1ad70f71088
+
+Since the BDP logic joins the authorisation transaction table to the latest transaction status, these transactions will not flow through to the final BDP aggregation when the authorisation record is missing.
+
+Could you please help us confirm whether this is an expected source scenario, or whether the corresponding authorisation records are missing/delayed in FDP?
+
+
+-- Status table
+SELECT *
+FROM FDP_UK_CARDS_DB.PAYMENT_GATEWAY_TRANSACTION_STATUS
+WHERE TRANSACTION_IDENTIFIER IN (
+    '000bc4c2-ab16-4bf8-98d2-84c04e36b46c',
+    '0099d822-e5b0-4bde-a9ad-d1ad70f71088'
+)
+ORDER BY
+    TRANSACTION_IDENTIFIER,
+    SOURCE_CHANGE_TIMESTAMP,
+    SOURCE_INSERT_TIMESTAMP;
+
+
+
+-- Authorisation table
+SELECT *
+FROM FDP_UK_CARDS_DB.PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION
+WHERE TRANSACTION_IDENTIFIER IN (
+    '000bc4c2-ab16-4bf8-98d2-84c04e36b46c',
+    '0099d822-e5b0-4bde-a9ad-d1ad70f71088'
+);
