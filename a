@@ -1,0 +1,12 @@
+Hi Rinika, I’ve tested the updated deduplication logic using CASE_STATUS_CODE.
+
+The priority is now:
+COMPLETE first → other non-WITHDRAWN statuses → WITHDRAWN/NULL, with EFF_START_DATE DESC and APPLICATION_IDENTIFIER DESC used to make the selection deterministic.
+
+I also tested the main scenarios:
+
+* where a COMPLETE exists, the selected RN = 1 is always COMPLETE;
+* where there is no COMPLETE but another non-WITHDRAWN status exists, it does not select WITHDRAWN/NULL;
+* where all records are WITHDRAWN/NULL, it selects the latest application.
+
+All three validation checks returned 0 exceptions, so the updated logic looks consistent and removes the arbitrary record selection we had before.
