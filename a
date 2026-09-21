@@ -1,0 +1,5 @@
+Hi Rinika, yes — for the decision outcome analysis I filtered to QUOTE_STATUS_CODE = 'F' first and then took the latest pass per application using SDS_COUNTER DESC, so Q records were not included.
+
+From the mapping analysis, the decision status and case status are not 1:1. For example, ACCEPT is predominantly COMPLETE in the case table, but there are some exceptions, and REFER maps to several different case statuses including LAPSED, REFER, PEND and COMPLETE.
+
+Based on that, the current evidence suggests CASE_STATUS_CODE is the more appropriate status to use for the linked-application dedup logic, especially as the dedup section already joins to the case table. I’ll send you the code as well.
