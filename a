@@ -1,7 +1,0 @@
-Hi Rinika, I’ve applied the updated deterministic deduplication logic and tested the final numbers for 01-Aug.
-
-The Aggregator 2nd Check is 1824 with the new logic, compared with 1825 currently, so the result remains very closely aligned (difference of 1).
-
-I also checked the impacted linked-application groups and confirmed that the new logic removes the arbitrary record selection — for example, where the old logic could select a WITHDRAWN application, the new logic correctly prioritises COMPLETE where available, with application ID/date used as deterministic tie-breakers.
-
-I’m comfortable with the result and have retained the testing evidence.
