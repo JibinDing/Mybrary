@@ -1,0 +1,3 @@
+Hi all, I checked SmartPay authorization transactions from 2 Aug onwards against the transaction status table. There are 4,671 authorization transactions with no corresponding status record. 4,668 are from 18 Sep and 3 are from 21 Sep, so the missing records are heavily concentrated on 18 Sep rather than being related to 1 Aug.
+
+Sharing 20 sample transaction references below for investigation. Could you please help check why the corresponding transaction status records are not available in FDP?
