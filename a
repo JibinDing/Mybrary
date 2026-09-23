@@ -1,0 +1,17 @@
+SmartPay testing / fixes update:
+
+* Confirmed complete FDP SmartPay data is available from 2 Aug onwards.
+* Updated the Day-0 reload logic to delete and reload SmartPay data from 2 Aug 2026 onwards.
+* Revalidated missing transaction status records from 2 Aug onwards. Identified 4,671 authorization transactions without a corresponding status record; 4,668 are from 18 Sep and 3 from 21 Sep.
+* Prepared sample transaction references for the SmartPay findings group to investigate the missing status records at source.
+* Existing latest-status logic retains SOURCE_INSERT_TIMESTAMP DESC as the tie-breaker to provide deterministic status selection.
+
+
+
+
+    Investigated the linked application de-duplication issue where multiple application IDs can share the same linked application number.
+* Reviewed Decision Status vs Case Status and confirmed CASE_STATUS_CODE is more appropriate for the de-duplication logic.
+* Updated the logic to make the record selection deterministic: prioritise COMPLETE, then other non-WITHDRAWN statuses, with the latest APPLICATION_IDENTIFIER used as the tie-breaker.
+* Tested the updated logic across different scenarios and confirmed no duplicate/bad groups were produced.
+* Compared the final numbers for 01-Aug-2026: Aggregator 2nd Check = 1824 with the new logic vs 1825 in the current/dashboard result, so the output is closely aligned.
+* Also performed a high-level comparison of the downstream Aggregator Conversion measures; any remaining Tableau reconciliation difference appears separate from the de-duplication change.
