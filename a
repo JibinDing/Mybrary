@@ -1,4 +1,0 @@
-I checked the code and found the difference is caused by the calculation logic rather than the deduplication change.
-APPLICATION_ACCEPT_COUNT counts all applications with FULL_APPLICATION_STATUS_CODE = 'COMPLETE', whereas the API/Direct On-Us accept application counts have additional conditions such as QUOTE_DECISION_CODE = 'Accept', pre-approved / linked application conditions, and for Direct also the full-quote condition.
-
-Therefore the 2 API and 11 Direct applications are COMPLETE applications which do not satisfy all of the additional On-Us accept conditions. This is why the measures do not fully align.
