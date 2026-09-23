@@ -1,18 +1,5 @@
-SELECT
-    APPLICATION_CREATED_DATE,
+The numbers are not aligned because we were using different measures. The 1281 / 1136 figures were calculated using API_ACCEPT_ON_US_ACCEPT_APPLICATION_COUNT and DIRECT_ON_US_ACCEPT_APPLICATION_COUNT, whereas Nihal’s 1219 / 1102 figures are based on APPLICATION_ACCEPT_COUNT split by AGGREGATOR_INDICATOR.
 
-    SUM(API_ACCEPT_ON_US_ACCEPT_APPLICATION_COUNT)
-        AS API_ACCEPTED_APPLICATIONS,
+When I use the same field and logic as Nihal, I get 1219 API and 1102 Direct, total 2321, so those are aligned.
 
-    SUM(DIRECT_ON_US_ACCEPT_APPLICATION_COUNT)
-        AS DIRECT_ACCEPTED_APPLICATIONS,
-
-    SUM(API_ACCEPT_ON_US_ACCEPT_APPLICATION_COUNT)
-      + SUM(DIRECT_ON_US_ACCEPT_APPLICATION_COUNT)
-        AS TOTAL_ACCEPTED_APPLICATIONS
-
-FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
-
-WHERE APPLICATION_CREATED_DATE = '2026-08-01'
-
-GROUP BY APPLICATION_CREATED_DATE;
+Also, API_ACCEPT_ON_US_ACCEPT_APPLICATION_COUNT is only for the ACCEPT outcome, not all full applications irrespective of outcome. For total full applications we would need to include the other relevant outcomes as well.
