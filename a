@@ -1,5 +1,0 @@
-The numbers are not aligned because we were using different measures. The 1281 / 1136 figures were calculated using API_ACCEPT_ON_US_ACCEPT_APPLICATION_COUNT and DIRECT_ON_US_ACCEPT_APPLICATION_COUNT, whereas Nihal’s 1219 / 1102 figures are based on APPLICATION_ACCEPT_COUNT split by AGGREGATOR_INDICATOR.
-
-When I use the same field and logic as Nihal, I get 1219 API and 1102 Direct, total 2321, so those are aligned.
-
-Also, API_ACCEPT_ON_US_ACCEPT_APPLICATION_COUNT is only for the ACCEPT outcome, not all full applications irrespective of outcome. For total full applications we would need to include the other relevant outcomes as well.
