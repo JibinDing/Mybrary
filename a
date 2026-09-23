@@ -1,0 +1,1 @@
+Yes, you’re right. I mixed up the two similarly named fields. API_ACCEPT_ON_US_ACCEPT_APPLICATION_COUNT is the full application count irrespective of outcome, while API_ACCEPT_ON_US_ACCEPT_APPLICATION_ACCEPT_COUNT is specifically the accepted applications.
