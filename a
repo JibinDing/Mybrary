@@ -1,0 +1,11 @@
+Test Case:
+Linked Application Deduplication
+
+Business Requirement:
+Ensure one deterministic application is selected for each LINKED_APPLICATION_NUMBER.
+
+Test Performed:
+Validated COMPLETE priority, non-WITHDRAWN priority and latest application selection where all records are WITHDRAWN.
+
+Expected Result:
+All duplicate linked-application groups follow the defined prioritisation rules with no failed groups.
