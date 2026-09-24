@@ -1,5 +1,0 @@
-Hi Steve, could I quickly check the logic for application accept counts with you?
-
-We found that APPLICATION_ACCEPT_COUNT counts all applications where FULL_APPLICATION_STATUS_CODE = 'COMPLETE', whereas the API/Direct On-Us accepted application measures apply some additional conditions such as quote decision, pre-approved/linked application logic, etc.
-
-This is causing a small difference in the counts. Could you confirm which approach is the correct business definition for an accepted application, so we can apply the same logic consistently across these measures?
