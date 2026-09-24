@@ -1,0 +1,52 @@
+SELECT
+    SCORECARD_SDS_CODE,
+    RISK_EVALUATION_SCORECARD_NAME,
+
+    COUNT(*) AS RECORD_COUNT,
+
+    COUNT_IF(NEW_GEN_12_SCORE IS NOT NULL) AS GEN12_SCORE_POPULATED,
+
+    COUNT_IF(GEN16_OM_PRIME_SCORE IS NOT NULL) AS GEN16_SCORE_POPULATED,
+
+    CASE
+        WHEN SCORECARD_SDS_CODE IN ('12', '13')
+             AND COUNT_IF(NEW_GEN_12_SCORE IS NULL) = 0
+            THEN 'PASS'
+
+        WHEN SCORECARD_SDS_CODE IN ('15', '16')
+             AND COUNT_IF(GEN16_OM_PRIME_SCORE IS NULL) = 0
+            THEN 'PASS'
+
+        WHEN SCORECARD_SDS_CODE NOT IN ('12', '13', '15', '16')
+             OR SCORECARD_SDS_CODE IS NULL
+            THEN 'N/A'
+
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+GROUP BY
+    SCORECARD_SDS_CODE,
+    RISK_EVALUATION_SCORECARD_NAME
+
+ORDER BY
+    SCORECARD_SDS_CODE,
+    RISK_EVALUATION_SCORECARD_NAME;
+
+
+
+Test Case:
+Risk Score / Risk Scorecard Name
+
+Business Requirement:
+Ensure the appropriate risk score is populated according to the applicable scorecard.
+
+Test Performed:
+Validated risk score population by Scorecard SDS Code and reviewed the associated Risk Evaluation Scorecard Name.
+
+Expected Result:
+Gen12 score is populated for applicable Gen12 scorecards and Gen16 score is populated for applicable Gen16 scorecards.
+
+Status:
+PASS / FAIL based on query result
