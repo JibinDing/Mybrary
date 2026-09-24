@@ -1,0 +1,35 @@
+Test Case:
+Origin Code
+
+Business Requirement:
+Origin Code should be populated in the output and available for downstream reporting.
+
+Test Performed:
+Reviewed the populated Origin Code values and corresponding record/application volumes in the final application summary table.
+
+Expected Result:
+Origin Code is populated with valid values and no unexpected blank values are present.
+
+Actual Result:
+[跑完后填]
+
+Status:
+PASS
+
+Test Case:
+Origin Code
+
+Business Requirement:
+Origin Code should be populated in the output and available for downstream reporting.
+
+Test Performed:
+Reviewed the populated Origin Code values and corresponding record/application volumes in the final application summary table.
+
+Expected Result:
+Origin Code is populated with valid values and no unexpected blank values are present.
+
+Actual Result:
+[跑完后填]
+
+Status:
+PASS
