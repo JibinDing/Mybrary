@@ -1,14 +1,112 @@
-Business Requirement:
-For multiple applications sharing the same LINKED_APPLICATION_NUMBER, select one deterministic application record to avoid arbitrary results.
+WITH DEDUP AS (
+    SELECT
+        APP.LINKED_APPLICATION_NUMBER,
+        APP.APPLICATION_IDENTIFIER,
+        UPPER(TRIM(CSE.CASE_STATUS_CODE)) AS FULL_APPLICATION_STATUS_CODE,
 
-Test Performed:
-Tested linked application groups with multiple application identifiers and different case statuses. Verified the prioritisation logic: COMPLETE first, then non-WITHDRAWN, and if all are WITHDRAWN select the latest application identifier.
+        ROW_NUMBER() OVER (
+            PARTITION BY APP.LINKED_APPLICATION_NUMBER
+            ORDER BY
+                CASE
+                    WHEN UPPER(TRIM(CSE.CASE_STATUS_CODE)) = 'COMPLETE' THEN 1
+                    WHEN UPPER(TRIM(CSE.CASE_STATUS_CODE)) <> 'WITHDRAWN' THEN 2
+                    ELSE 3
+                END,
+                APP.APPLICATION_IDENTIFIER DESC
+        ) AS RN
 
-Expected Result:
-Only one application is selected per LINKED_APPLICATION_NUMBER and the same record is consistently selected on each run.
+    FROM FDP_UK_CARDS_DB.CREDIT_CARD_APPLICATION APP
 
-Actual Result:
-Deduplication logic returned one deterministic record per linked application group as expected.
+    JOIN FDP_UK_CARDS_DB.CREDIT_CARD_APPLICATION_CASE CSE
+        ON APP.APPLICATION_IDENTIFIER = CSE.APPLICATION_IDENTIFIER
 
-Evidence:
-SQL test results showing multiple application identifiers under the same LINKED_APPLICATION_NUMBER and the selected record after applying the prioritisation logic.
+    WHERE APP.LINKED_APPLICATION_NUMBER IS NOT NULL
+      AND APP.ACTIVE = '1'
+      AND CSE.CASE_TYPE = 'PRODUCTAPP'
+      AND CSE.ACTIVE = '1'
+      AND CSE.CASE_CREATION_DATE >= '2026-01-01'
+),
+
+GROUP_CHECK AS (
+    SELECT
+        LINKED_APPLICATION_NUMBER,
+        COUNT(*) AS APPLICATION_COUNT,
+
+        COUNT_IF(FULL_APPLICATION_STATUS_CODE = 'COMPLETE')
+            AS COMPLETE_COUNT,
+
+        COUNT_IF(FULL_APPLICATION_STATUS_CODE <> 'WITHDRAWN')
+            AS NON_WITHDRAWN_COUNT,
+
+        MAX(
+            CASE WHEN RN = 1
+                 THEN FULL_APPLICATION_STATUS_CODE
+            END
+        ) AS SELECTED_STATUS,
+
+        MAX(
+            CASE WHEN RN = 1
+                 THEN APPLICATION_IDENTIFIER
+            END
+        ) AS SELECTED_APPLICATION_IDENTIFIER,
+
+        MAX(APPLICATION_IDENTIFIER)
+            AS LATEST_APPLICATION_IDENTIFIER
+
+    FROM DEDUP
+    GROUP BY LINKED_APPLICATION_NUMBER
+    HAVING COUNT(*) > 1
+),
+
+VALIDATION AS (
+    SELECT
+        *,
+
+        CASE
+            WHEN COMPLETE_COUNT > 0
+                THEN '1. COMPLETE present -> COMPLETE selected'
+
+            WHEN COMPLETE_COUNT = 0
+             AND NON_WITHDRAWN_COUNT > 0
+                THEN '2. No COMPLETE -> non-WITHDRAWN selected'
+
+            ELSE
+                '3. All WITHDRAWN/NULL -> latest application ID selected'
+        END AS TEST_SCENARIO,
+
+        CASE
+            WHEN COMPLETE_COUNT > 0
+             AND SELECTED_STATUS = 'COMPLETE'
+                THEN 'PASS'
+
+            WHEN COMPLETE_COUNT = 0
+             AND NON_WITHDRAWN_COUNT > 0
+             AND SELECTED_STATUS <> 'WITHDRAWN'
+                THEN 'PASS'
+
+            WHEN COMPLETE_COUNT = 0
+             AND NON_WITHDRAWN_COUNT = 0
+             AND SELECTED_APPLICATION_IDENTIFIER = LATEST_APPLICATION_IDENTIFIER
+                THEN 'PASS'
+
+            ELSE 'FAIL'
+        END AS TEST_RESULT
+
+    FROM GROUP_CHECK
+)
+
+SELECT
+    TEST_SCENARIO,
+    COUNT(*) AS GROUPS_TESTED,
+    COUNT_IF(TEST_RESULT = 'PASS') AS PASSED_GROUPS,
+    COUNT_IF(TEST_RESULT = 'FAIL') AS FAILED_GROUPS,
+
+    CASE
+        WHEN COUNT_IF(TEST_RESULT = 'FAIL') = 0
+            THEN 'PASS'
+        ELSE 'FAIL'
+    END AS OVERALL_RESULT
+
+FROM VALIDATION
+GROUP BY TEST_SCENARIO
+ORDER BY TEST_SCENARIO;
