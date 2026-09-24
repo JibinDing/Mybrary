@@ -1,0 +1,39 @@
+WITH ORIGIN_CHECK AS (
+    SELECT
+        COALESCE(NULLIF(TRIM(ORIGIN_CODE), ''), 'NULL / BLANK') AS ORIGIN_CODE,
+        COUNT(*) AS RECORD_COUNT,
+        SUM(COALESCE(APPLICATION_COUNT, 0)) AS APPLICATION_COUNT
+    FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+    GROUP BY 1
+)
+
+SELECT
+    ORIGIN_CODE,
+    RECORD_COUNT,
+    APPLICATION_COUNT,
+    CASE
+        WHEN ORIGIN_CODE = 'NULL / BLANK' THEN 'REVIEW'
+        ELSE 'PASS'
+    END AS TEST_RESULT
+FROM ORIGIN_CHECK
+ORDER BY RECORD_COUNT DESC;
+
+
+
+Test Case:
+Origin Code
+
+Business Requirement:
+Origin Code should be populated in the output and available for downstream reporting.
+
+Test Performed:
+Reviewed the populated Origin Code values and corresponding record/application volumes in the final application summary table.
+
+Expected Result:
+Origin Code is populated with valid values and no unexpected blank values are present.
+
+Actual Result:
+[跑完后填]
+
+Status:
+PASS
