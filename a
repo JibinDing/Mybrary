@@ -1,0 +1,14 @@
+Business Requirement:
+For multiple applications sharing the same LINKED_APPLICATION_NUMBER, select one deterministic application record to avoid arbitrary results.
+
+Test Performed:
+Tested linked application groups with multiple application identifiers and different case statuses. Verified the prioritisation logic: COMPLETE first, then non-WITHDRAWN, and if all are WITHDRAWN select the latest application identifier.
+
+Expected Result:
+Only one application is selected per LINKED_APPLICATION_NUMBER and the same record is consistently selected on each run.
+
+Actual Result:
+Deduplication logic returned one deterministic record per linked application group as expected.
+
+Evidence:
+SQL test results showing multiple application identifiers under the same LINKED_APPLICATION_NUMBER and the selected record after applying the prioritisation logic.
