@@ -1,11 +1,69 @@
+SELECT
+    ACQUISITION_SEGMENT1,
+    ACQ_SEGMENT2,
+    COUNT(*) AS RECORD_COUNT,
+
+    CASE
+        WHEN ACQ_SEGMENT2 = 'Forward'
+             AND ACQUISITION_SEGMENT1 = 'Forward'
+            THEN 'PASS'
+
+        WHEN ACQ_SEGMENT2 = 'Combo'
+             AND ACQUISITION_SEGMENT1 = 'Platinum Combo'
+            THEN 'PASS'
+
+        WHEN ACQ_SEGMENT2 IN (
+                'Platinum BT Short',
+                'Platinum BT Mid',
+                'Platinum BT Long'
+             )
+             AND ACQUISITION_SEGMENT1 = 'Platinum BT'
+            THEN 'PASS'
+
+        WHEN ACQ_SEGMENT2 IN (
+                'Amazon',
+                'Rewards',
+                'Avios',
+                'Avios Plus'
+             )
+             AND ACQUISITION_SEGMENT1 = 'Rewards'
+            THEN 'PASS'
+
+        WHEN ACQ_SEGMENT2 = 'Unknown'
+             AND ACQUISITION_SEGMENT1 = 'Unknown'
+            THEN 'PASS'
+
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+GROUP BY
+    ACQUISITION_SEGMENT1,
+    ACQ_SEGMENT2
+
+ORDER BY
+    TEST_RESULT DESC,
+    ACQUISITION_SEGMENT1,
+    ACQ_SEGMENT2;
+
+
+
+
 Test Case:
-Linked Application Deduplication
+Acquisition Segment1/2
 
 Business Requirement:
-Ensure one deterministic application is selected for each LINKED_APPLICATION_NUMBER.
+Align Acquisition Segment 1 and Segment 2 classifications with the agreed NCA MI product mapping.
 
 Test Performed:
-Validated COMPLETE priority, non-WITHDRAWN priority and latest application selection where all records are WITHDRAWN.
+Validated all populated Acquisition Segment1/2 combinations in the output table against the agreed mapping for Forward, Combo, Platinum BT, Amazon, Rewards, Avios and Avios Plus.
 
 Expected Result:
-All duplicate linked-application groups follow the defined prioritisation rules with no failed groups.
+All populated Segment1/2 combinations follow the agreed mapping with no invalid combinations.
+
+Actual Result:
+All populated Acquisition Segment1/2 combinations matched the expected mapping.
+
+Status:
+PASS
