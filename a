@@ -1,0 +1,69 @@
+Test Case Type:
+Direct On-Us Conversion Reconciliation
+
+Test Case Long Description:
+Validate that Direct On-Us Conversion includes all direct applications that progressed to a final accepted application outcome, irrespective of whether the interim On-Us decision was Accept, Refer or Decline.
+
+Expected Results:
+Direct On-Us Conversion should equal the sum of:
+Direct On-Us Accept → Application Accept
++ Direct On-Us Refer → Application Accept
++ Direct On-Us Decline → Application Accept.
+
+The calculated volume should align with the corresponding Tableau measure for the same application decision date range.
+
+Actual Results:
+Pending execution once Snowflake warehouse is available.
+
+Status:
+Pending
+
+Evidence Link:
+Pending
+
+Query Used:
+Prepared - pending execution.
+
+
+
+
+WITH DAILY_CHECK AS (
+    SELECT
+        APPLICATION_DECISION_DATE,
+
+        SUM(
+            COALESCE(DIRECT_ON_US_ACCEPT_APPLICATION_ACCEPT_COUNT, 0)
+        ) AS DIRECT_ACCEPT_APP_ACCEPTED,
+
+        SUM(
+            COALESCE(DIRECT_ON_US_REFER_APPLICATION_ACCEPT_COUNT, 0)
+        ) AS DIRECT_REFER_APP_ACCEPTED,
+
+        SUM(
+            COALESCE(DIRECT_ON_US_DECLINE_APPLICATION_ACCEPT_COUNT, 0)
+        ) AS DIRECT_DECLINE_APP_ACCEPTED
+
+    FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+    WHERE APPLICATION_DECISION_DATE IS NOT NULL
+
+    GROUP BY APPLICATION_DECISION_DATE
+)
+
+SELECT
+    APPLICATION_DECISION_DATE,
+
+    DIRECT_ACCEPT_APP_ACCEPTED,
+    DIRECT_REFER_APP_ACCEPTED,
+    DIRECT_DECLINE_APP_ACCEPTED,
+
+    DIRECT_ACCEPT_APP_ACCEPTED
+      + DIRECT_REFER_APP_ACCEPTED
+      + DIRECT_DECLINE_APP_ACCEPTED
+        AS DIRECT_ON_US_CONVERSION
+
+FROM DAILY_CHECK
+
+ORDER BY APPLICATION_DECISION_DATE DESC;
+
+
