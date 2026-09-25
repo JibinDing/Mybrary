@@ -1,0 +1,84 @@
+Test Case Type:
+Aggregator On-Us Eligibility Reconciliation
+
+Test Case Long Description:
+Validate that Aggregator On-Us Eligibility Checks reconcile to the sum of Accepted, Referred and Declined On-Us outcomes for each application decision date.
+
+Expected Results:
+Aggregator On-Us Eligibility Checks should equal:
+On-Us Accepted
++ On-Us Referred
++ On-Us Declined.
+
+There should be zero difference between the total Aggregator On-Us Eligibility volume and the sum of its outcome buckets.
+
+Actual Results:
+Pending execution once Snowflake warehouse is available.
+
+Status:
+Pending
+
+Evidence Link:
+Pending
+
+Query Used:
+Prepared - pending execution.
+
+
+
+
+WITH DAILY_CHECK AS (
+    SELECT
+        APPLICATION_DECISION_DATE,
+
+        SUM(COALESCE(API_ACCEPT_ON_US_CHECK_COUNT, 0))
+            AS AGGREGATOR_ON_US_ELIGIBILITY,
+
+        SUM(COALESCE(API_ACCEPT_ON_US_ACCEPT_COUNT, 0))
+            AS ON_US_ACCEPTED,
+
+        SUM(COALESCE(API_ACCEPT_ON_US_REFER_COUNT, 0))
+            AS ON_US_REFERRED,
+
+        SUM(COALESCE(API_ACCEPT_ON_US_DECLINE_COUNT, 0))
+            AS ON_US_DECLINED
+
+    FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+    WHERE APPLICATION_DECISION_DATE IS NOT NULL
+
+    GROUP BY APPLICATION_DECISION_DATE
+)
+
+SELECT
+    APPLICATION_DECISION_DATE,
+
+    AGGREGATOR_ON_US_ELIGIBILITY,
+    ON_US_ACCEPTED,
+    ON_US_REFERRED,
+    ON_US_DECLINED,
+
+    ON_US_ACCEPTED
+      + ON_US_REFERRED
+      + ON_US_DECLINED
+        AS CALCULATED_ON_US_TOTAL,
+
+    AGGREGATOR_ON_US_ELIGIBILITY
+      - (
+            ON_US_ACCEPTED
+          + ON_US_REFERRED
+          + ON_US_DECLINED
+        ) AS DIFFERENCE,
+
+    CASE
+        WHEN AGGREGATOR_ON_US_ELIGIBILITY =
+             ON_US_ACCEPTED
+           + ON_US_REFERRED
+           + ON_US_DECLINED
+        THEN 'PASS'
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM DAILY_CHECK
+
+ORDER BY APPLICATION_DECISION_DATE DESC;
