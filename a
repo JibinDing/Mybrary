@@ -1,0 +1,84 @@
+Test Case Type:
+API Quote Eligibility Checks Reconciliation
+
+Test Case Long Description:
+Validate that the total API Quote Eligibility Checks reconcile to the sum of API Quote Accepted, Referred and Declined outcomes for each application decision date.
+
+Expected Results:
+API Quote Eligibility Checks should equal:
+API Quote Accepted
++ API Quote Referred
++ API Quote Declined.
+
+There should be zero difference between the total API quote count and the sum of the three quote outcome buckets.
+
+Actual Results:
+Pending execution once Snowflake warehouse is available.
+
+Status:
+Pending
+
+Evidence Link:
+Pending
+
+Query Used:
+Prepared - pending execution.
+
+
+
+
+WITH DAILY_CHECK AS (
+    SELECT
+        APPLICATION_DECISION_DATE,
+
+        SUM(COALESCE(API_QUOTE_COUNT, 0))
+            AS API_QUOTE_ELIGIBILITY_CHECKS,
+
+        SUM(COALESCE(API_QUOTE_ACCEPT_COUNT, 0))
+            AS QUOTES_ACCEPTED,
+
+        SUM(COALESCE(API_QUOTE_REFER_COUNT, 0))
+            AS QUOTES_REFERRED,
+
+        SUM(COALESCE(API_QUOTE_DECLINE_COUNT, 0))
+            AS QUOTES_DECLINED
+
+    FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+    WHERE APPLICATION_DECISION_DATE IS NOT NULL
+
+    GROUP BY APPLICATION_DECISION_DATE
+)
+
+SELECT
+    APPLICATION_DECISION_DATE,
+
+    API_QUOTE_ELIGIBILITY_CHECKS,
+    QUOTES_ACCEPTED,
+    QUOTES_REFERRED,
+    QUOTES_DECLINED,
+
+    QUOTES_ACCEPTED
+      + QUOTES_REFERRED
+      + QUOTES_DECLINED
+        AS CALCULATED_API_QUOTE_TOTAL,
+
+    API_QUOTE_ELIGIBILITY_CHECKS
+      - (
+            QUOTES_ACCEPTED
+          + QUOTES_REFERRED
+          + QUOTES_DECLINED
+        ) AS DIFFERENCE,
+
+    CASE
+        WHEN API_QUOTE_ELIGIBILITY_CHECKS =
+             QUOTES_ACCEPTED
+           + QUOTES_REFERRED
+           + QUOTES_DECLINED
+        THEN 'PASS'
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM DAILY_CHECK
+
+ORDER BY APPLICATION_DECISION_DATE DESC;
