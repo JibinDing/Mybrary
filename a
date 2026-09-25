@@ -1,0 +1,84 @@
+Test Case Type:
+Direct On-Us Eligibility Reconciliation
+
+Test Case Long Description:
+Validate that Direct On-Us Eligibility Checks reconcile to the sum of Direct On-Us Accepted, Referred and Declined outcomes for each application decision date.
+
+Expected Results:
+Direct On-Us Eligibility Checks should equal:
+Direct On-Us Accepted
++ Direct On-Us Referred
++ Direct On-Us Declined.
+
+There should be zero difference between the total Direct On-Us Eligibility volume and the sum of its three outcome buckets.
+
+Actual Results:
+Pending execution once Snowflake warehouse is available.
+
+Status:
+Pending
+
+Evidence Link:
+Pending
+
+Query Used:
+Prepared - pending execution.
+
+
+
+
+WITH DAILY_CHECK AS (
+    SELECT
+        APPLICATION_DECISION_DATE,
+
+        SUM(COALESCE(DIRECT_ON_US_CHECK_COUNT, 0))
+            AS DIRECT_ON_US_ELIGIBILITY,
+
+        SUM(COALESCE(DIRECT_ON_US_ACCEPT_APPLICATION_COUNT, 0))
+            AS DIRECT_ON_US_ACCEPTED,
+
+        SUM(COALESCE(DIRECT_ON_US_REFER_APPLICATION_COUNT, 0))
+            AS DIRECT_ON_US_REFERRED,
+
+        SUM(COALESCE(DIRECT_ON_US_DECLINE_APPLICATION_COUNT, 0))
+            AS DIRECT_ON_US_DECLINED
+
+    FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+    WHERE APPLICATION_DECISION_DATE IS NOT NULL
+
+    GROUP BY APPLICATION_DECISION_DATE
+)
+
+SELECT
+    APPLICATION_DECISION_DATE,
+
+    DIRECT_ON_US_ELIGIBILITY,
+    DIRECT_ON_US_ACCEPTED,
+    DIRECT_ON_US_REFERRED,
+    DIRECT_ON_US_DECLINED,
+
+    DIRECT_ON_US_ACCEPTED
+      + DIRECT_ON_US_REFERRED
+      + DIRECT_ON_US_DECLINED
+        AS CALCULATED_DIRECT_ON_US_TOTAL,
+
+    DIRECT_ON_US_ELIGIBILITY
+      - (
+            DIRECT_ON_US_ACCEPTED
+          + DIRECT_ON_US_REFERRED
+          + DIRECT_ON_US_DECLINED
+        ) AS DIFFERENCE,
+
+    CASE
+        WHEN DIRECT_ON_US_ELIGIBILITY =
+             DIRECT_ON_US_ACCEPTED
+           + DIRECT_ON_US_REFERRED
+           + DIRECT_ON_US_DECLINED
+        THEN 'PASS'
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM DAILY_CHECK
+
+ORDER BY APPLICATION_DECISION_DATE DESC;
