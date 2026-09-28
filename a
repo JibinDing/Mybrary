@@ -1,0 +1,37 @@
+Salary Band
+
+
+Validate that Salary Band is populated correctly in the NCMI output and review all populated salary band values for unexpected or unmapped classifications.
+
+
+Only the defined Salary Band classifications should be populated in the NCMI output. Records with no Net Monthly Income Amount should be classified as 'Unknown'. No unexpected Salary Band values should be present.
+
+
+SELECT
+    SALARY_BAND,
+    COUNT(*) AS RECORD_COUNT,
+    SUM(COALESCE(APPLICATION_COUNT, 0)) AS APPLICATION_VOLUME,
+
+    CASE
+        WHEN SALARY_BAND IN (
+            'Unknown',
+            'Under £10k',
+            '£10k-£15k',
+            '£15k-£22.5k',
+            '£22.5k-£30k',
+            '£30k-£50k',
+            '£50k-£75k',
+            '£75k-£150k',
+            '£150k-£250k',
+            '£250k-£500k',
+            '£500k+'
+        )
+        THEN 'PASS'
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+GROUP BY SALARY_BAND
+
+ORDER BY APPLICATION_VOLUME DESC;
