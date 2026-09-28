@@ -1,0 +1,58 @@
+Test Case Type:
+Barclays Customer Indicator – Post 01-Aug-2026 Logic
+
+Test Case Long Description:
+Validate that from 01-Aug-2026 onwards the Barclays Customer Indicator is derived correctly based on Risk Scorecard Name, and review all populated source scorecard values for unexpected values.
+
+Expected Results:
+Records with Risk Scorecard Name of 'GEN 16 BANK' or 'CACS' should be classified as Barclays Customer Indicator = 'Y'. All other values should be classified as 'N'. No incorrectly mapped values should be present.
+
+Actual Results:
+Pending execution.
+
+Status:
+Pending
+
+
+WITH VALIDATION AS (
+    SELECT
+        APPLICATION_DECISION_DATE,
+        RISK_SCORECARD_NAME,
+        BARCLAYS_CUSTOMER_INDICATOR,
+        APPLICATION_COUNT,
+
+        CASE
+            WHEN UPPER(TRIM(RISK_SCORECARD_NAME))
+                 IN ('GEN 16 BANK', 'CACS')
+            THEN 'Y'
+            ELSE 'N'
+        END AS EXPECTED_CUSTOMER_INDICATOR
+
+    FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+
+    WHERE APPLICATION_DECISION_DATE >= DATE '2026-08-01'
+)
+
+SELECT
+    RISK_SCORECARD_NAME,
+    BARCLAYS_CUSTOMER_INDICATOR AS ACTUAL_INDICATOR,
+    EXPECTED_CUSTOMER_INDICATOR,
+
+    SUM(COALESCE(APPLICATION_COUNT, 0)) AS APPLICATION_VOLUME,
+
+    CASE
+        WHEN BARCLAYS_CUSTOMER_INDICATOR = EXPECTED_CUSTOMER_INDICATOR
+        THEN 'PASS'
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM VALIDATION
+
+GROUP BY
+    RISK_SCORECARD_NAME,
+    BARCLAYS_CUSTOMER_INDICATOR,
+    EXPECTED_CUSTOMER_INDICATOR
+
+ORDER BY
+    TEST_RESULT DESC,
+    APPLICATION_VOLUME DESC;
