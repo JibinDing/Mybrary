@@ -1,0 +1,39 @@
+Risk Segment / Risk Scorecard Name
+
+Validate that Risk Segment and Risk Scorecard Name are populated correctly in the NCMI output and review the populated combinations for unexpected or unmapped values.
+
+
+Risk Segment and Risk Scorecard Name should be populated with valid source values where applicable.
+
+No unexpected blank or incorrectly mapped values should be present, and populated Risk Segment / Risk Scorecard Name combinations should be consistent with the underlying application risk data.
+
+
+SELECT
+    COALESCE(NULLIF(TRIM(RISK_SEGMENT), ''), 'NULL / BLANK') AS RISK_SEGMENT,
+    COALESCE(NULLIF(TRIM(RISK_SCORECARD_NAME), ''), 'NULL / BLANK') AS RISK_SCORECARD_NAME,
+
+    COUNT(*) AS RECORD_COUNT,
+
+    SUM(COALESCE(APPLICATION_COUNT, 0)) AS APPLICATION_VOLUME,
+
+    CASE
+        WHEN RISK_SEGMENT = 'NULL / BLANK'
+          OR RISK_SCORECARD_NAME = 'NULL / BLANK'
+        THEN 'REVIEW'
+        ELSE 'PASS'
+    END AS TEST_RESULT
+
+FROM (
+    SELECT
+        RISK_SEGMENT,
+        RISK_SCORECARD_NAME,
+        APPLICATION_COUNT
+    FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY
+)
+
+GROUP BY
+    RISK_SEGMENT,
+    RISK_SCORECARD_NAME
+
+ORDER BY
+    APPLICATION_VOLUME DESC;
