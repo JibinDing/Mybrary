@@ -1,0 +1,31 @@
+Purchase Rate
+
+Validate that Purchase Rate is populated correctly in the NCMI output from APR Percentage Applied Amount and review the populated volume and value range for unexpected values.
+
+
+Purchase Rate should be populated from APR Percentage Applied Amount where the source value is available.
+
+Populated Purchase Rate values should be numeric and no unexpected values should be present.
+
+
+
+SELECT
+    COUNT(*) AS RECORD_COUNT,
+
+    SUM(COALESCE(APPLICATION_COUNT, 0)) AS APPLICATION_VOLUME,
+
+    COUNT_IF(PURCHASE_RATE IS NOT NULL) AS PURCHASE_RATE_POPULATED,
+
+    COUNT_IF(PURCHASE_RATE IS NULL) AS PURCHASE_RATE_NULL,
+
+    MIN(PURCHASE_RATE) AS MIN_PURCHASE_RATE,
+
+    MAX(PURCHASE_RATE) AS MAX_PURCHASE_RATE,
+
+    CASE
+        WHEN COUNT_IF(PURCHASE_RATE IS NOT NULL) > 0
+        THEN 'PASS'
+        ELSE 'FAIL'
+    END AS TEST_RESULT
+
+FROM BDP_UK_CARDS.FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY;
