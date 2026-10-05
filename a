@@ -1,1 +1,16 @@
-Hi Rinika, I tested the Application Accept Count reconciliation against the booked application components we discussed. It is almost fully aligned, but there is a residual difference of 57 applications across 3 decision dates. 55 of the difference is from Aggregator records and 2 from Direct. API Decline → App Accept is 0 as expected. I’m looking into what is driving the remaining 57 — I can send you the query/results as well.
+SELECT
+    TABLE_SCHEMA,
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE
+FROM PROD_BUK_SNSVC0073314_CARDS_BUSINESS_DB.INFORMATION_SCHEMA.COLUMNS
+WHERE
+       UPPER(COLUMN_NAME) LIKE '%MARKET%'
+    OR UPPER(COLUMN_NAME) LIKE '%CONSENT%'
+    OR UPPER(COLUMN_NAME) LIKE '%COOKIE%'
+    OR UPPER(COLUMN_NAME) LIKE '%OPT_OUT%'
+    OR UPPER(COLUMN_NAME) LIKE '%OPTOUT%'
+ORDER BY
+    TABLE_SCHEMA,
+    TABLE_NAME,
+    COLUMN_NAME;
