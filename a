@@ -1,1 +1,0 @@
-I checked the current NCMI logic. None of the identified cookie or marketing preference indicators are referenced in the NCMI code, so there is no explicit exclusion based on those indicators. Also, the Aggregator “Not Consented” population appears to be separate from the customer-level cookie/marketing preference fields.
