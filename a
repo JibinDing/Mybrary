@@ -1,0 +1,3 @@
+I checked the Long BT downsell population. In the source decision outcome data, around 257k records have DOWNSELL_COUNT > 0, which is roughly 6.8% of the Long BT population. Only around 2k records have a NULL downsell count, so the current ELSE 'Y' handling of NULLs is not materially driving the volume.
+
+In the NCMI summary, Downsell=Y for Platinum BT Long is around 11.3k versus 184k N, approximately 5.8%. So the relatively small Y population looks broadly consistent with the source rather than an obvious data issue.
