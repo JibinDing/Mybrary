@@ -1,3 +1,0 @@
-I’ve confirmed the NULLs are not present in the upstream IF023 data.
-For example, application 135902147 has downsell_counter = 1 for all five SDS records in IF023, but all corresponding records in CREDIT_CARD_APPLICATION_DECISION_OUTCOME have DOWNSELL_COUNT = NULL.
-I can also see cases where IF023 has 0 but FDP has NULL. So it looks like the NULLs are being introduced somewhere between IF023 and the FDP decision outcome table.
