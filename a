@@ -1,0 +1,25 @@
+Please analyse the current NCA MI SQL code in this repository.
+
+Do not make any code changes.
+
+I only need to understand how NCA MI selects its application population so I can compare it with the legacy CAS/AURA monthly sales extract.
+
+Please identify:
+
+1. Main source tables used for application population.
+2. Main application key(s), including how LINKED_APPLICATION_NUMBER is used.
+3. Date fields and date filters controlling inclusion.
+4. ACTIVE / CASE_TYPE / CASE_STATUS_CODE or other status filters.
+5. Deduplication logic, especially ROW_NUMBER / RN / QUALIFY rules.
+6. Any INNER JOINs or other filters that could remove applications.
+7. How full applications are identified.
+8. Which CTE ultimately feeds FACT_CARD_AGGREGATOR_APPLICATION_SUMMARY.
+
+Then give me a short comparison table:
+
+Area | NCA MI Logic | Potential impact on volume
+
+Focus only on application scope/population, not field mappings or calculations.
+
+Please include the exact CTE/table/column names and SQL conditions where possible.
+Do not speculate if the code does not support a conclusion.
