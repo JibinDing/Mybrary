@@ -1,1 +1,0 @@
-One thing worth confirming is that NULL downsell counts would also currently fall into Y because of the ELSE logic.
