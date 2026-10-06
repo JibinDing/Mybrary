@@ -1,0 +1,7 @@
+Hi Simon, we’re reviewing the Downsell Indicator logic for NCMI.
+
+The current logic maps DOWNSELL_COUNT = 0 to N and everything else to Y, which means NULL values are also currently classified as Y.
+
+We’ve found a small number of NULL DOWNSELL_COUNT records in the source application decision outcome data. Could you please confirm how NULLs should be treated from a business/data perspective — should they be N, Y, or treated separately as unknown?
+
+Also, do you know why DOWNSELL_COUNT can be NULL in the source? We don’t believe the NULLs are being introduced by our joins.
