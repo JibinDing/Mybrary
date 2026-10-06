@@ -1,1 +1,1 @@
-The source field is DOWNSELL_COUNT from the application decision outcome data, and NCMI derives the indicator as 0 = N, otherwise Y. For Platinum BT Long, the current output has around 184k N versus 11.3k Y, so the Y population is roughly 6%. 
+One thing worth confirming is that NULL downsell counts would also currently fall into Y because of the ELSE logic.
