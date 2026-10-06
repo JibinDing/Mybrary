@@ -1,0 +1,1 @@
+Thanks Simon — I checked the same IDs in FDP and can confirm the values are being lost downstream. For 135902147, IF023 has 1 for all five records, whereas FDP has NULL for all five.
