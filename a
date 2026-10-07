@@ -1,0 +1,12 @@
+SELECT
+    application_id,
+    Downsell0_Initial_Flag
+FROM e_casmart_db.if023_application
+WHERE application_id IN (
+    135944245,
+    135926234,
+    135902147,
+    135830269,
+    135993931
+)
+ORDER BY application_id;
