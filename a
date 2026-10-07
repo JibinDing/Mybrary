@@ -1,1 +1,7 @@
-Hi Simon, do you know how we should identify Platinum BT Long in if023_summary? I’m trying to compare the downsell volumes back to IF023, but I can’t see an obvious equivalent of REQUESTED_PRODUCT_CLASS_CODE. Is there a standard product field/mapping we should use?
+Hi, Rinika suggested I reach out to you regarding the legacy CAS/AURA reconciliation we are currently doing.
+
+We are trying to understand the lineage of A_UKC_CASMART_DB.APPLICATION, particularly the fields used for Decision Date and Application Status / Decision Status.
+
+Do you know which E-layer source tables/fields are used to populate these, or who currently owns/maintains this table?
+
+We are comparing the legacy monthly acquisition billing output against the new NCA MI FDP/BDP output and need the lineage to understand any volume differences.
