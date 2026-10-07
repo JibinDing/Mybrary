@@ -1,0 +1,1 @@
+Hi Simon, do you know how we should identify Platinum BT Long in if023_summary? I’m trying to compare the downsell volumes back to IF023, but I can’t see an obvious equivalent of REQUESTED_PRODUCT_CLASS_CODE. Is there a standard product field/mapping we should use?
