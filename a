@@ -1,0 +1,14 @@
+September Decision Month reconciliation summary
+
+* Legacy BDH volume: 131,178
+* NCMI final volume: 129,968
+* Difference: 1,210
+* Variance: -0.92%
+
+We also recreated the NCMI full-application population from FDP using QUOTE_STATUS_CODE = 'F'.
+
+* Before linked-application deduplication: 130,243
+* After NCMI deduplication: 129,973
+* Final NCMI table: 129,968
+
+Conclusion: The recreated FDP logic is almost fully aligned with the final NCMI output, with only 5 records difference after applying the NCMI deduplication logic. The remaining variance against the legacy BDH file is small (0.92%) and appears to be driven by differences in population/processing logic rather than a major volume issue.
