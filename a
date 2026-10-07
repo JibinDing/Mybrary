@@ -1,7 +1,0 @@
-Hi Sue, thanks. I think this may be a different NCA FDP initiative.
-
-We are currently reconciling the existing legacy CAS/AURA acquisition billing output against the current FDP cards source tables used by the NCA MI BDP solution (e.g. CREDIT_CARD_APPLICATION / APPLICATION_CASE / APPLICATION_DECISION_OUTCOME).
-
-The specific thing we are trying to trace is the lineage of A_UKC_CASMART_DB.APPLICATION, particularly the source fields used for Decision Date and Application Status/Decision Status.
-
-Do you know who owns/maintains this A-layer table, or which E-CAS source tables feed those fields?
