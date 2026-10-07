@@ -1,5 +1,0 @@
-Hi all, we have checked the latest data availability in FDP for SmartPay.
-
-The latest data in PAYMENT_GATEWAY_AUTHORIZATION_TRANSACTION is from 21 Sep, while PAYMENT_GATEWAY_TRANSACTION_STATUS has data up to 25 Sep.
-
-Could you please check why the latest SmartPay data is not flowing into FDP and advise if there is any known issue with the source feed?
