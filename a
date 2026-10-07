@@ -1,0 +1,1 @@
+=SUMIFS(K:K,C:C,DATE(2026,9,1))
