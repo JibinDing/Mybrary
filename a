@@ -1,0 +1,1 @@
+Thanks Sue, that’s really helpful. Just to confirm, do you know which of those two sources/fields specifically populate the Decision Date and Application Status in A_UKC_CASMART_DB.APPLICATION? We only need this for understanding the legacy lineage and reconciliation, rather than proposing these tables as the target FDP solution.
