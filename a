@@ -1,0 +1,29 @@
+Test Case: Decision Month Volume Reconciliation – Legacy BDH vs NCMI
+
+Business Requirement:
+
+Validate that the total application decision volumes in NCMI BDP are broadly aligned with the Legacy BDH monthly acquisition report for the same decision month.
+
+Test Performed:
+
+Compared the September 2026 decision month application volume from the Legacy BDH Excel report against the NCMI BDP final summary table using APPLICATION_DECISION_DATE. Calculated the absolute difference and percentage variance.
+
+Expected Result:
+
+Total decision month application volumes should be broadly aligned between Legacy BDH and NCMI BDP, with no significant unexplained variance.
+
+Actual Result:
+
+Legacy BDH: 131,178
+
+NCMI BDP: 129,905
+
+Difference: -1,273
+
+Variance: -0.97%
+
+The decision month volumes are closely aligned, with less than 1% variance.
+
+Test Status: PASS – Initial Volume Reconciliation
+
+Evidence: Snowflake SQL query and result screenshot, supported by the Legacy BDH September 2026 Excel extract.
