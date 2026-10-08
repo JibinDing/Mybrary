@@ -1,1 +1,0 @@
-Using the existing NCMI SQL and its upstream CTEs, generate a complete runnable SELECT query to break down DIRECT_ON_US_ACCEPT_APPLICATION_DECLINE_COUNT by FULL_APPLICATION_STATUS_CODE for September 2026 (APPLICATION_DECISION_DATE). Preserve the exact original counting conditions. Return each status and its count. Do not modify the production logic.
