@@ -1,0 +1,23 @@
+Test Case Type
+
+Downsell Indicator – Platinum BT Long Source Reconciliation
+
+Test Case Long Description
+
+Validate that the Downsell Indicator population for Platinum BT Long in BDP is consistent with the upstream IF023/CAS source. Compare Downsell and No Downsell application volumes using the same application decision date range (01-Jan-2026 to 05-Oct-2026) and the equivalent Platinum BT Long population definition.
+
+Expected Results
+
+The proportion and volume of Platinum BT Long applications classified as Downsell / No Downsell in BDP should broadly align with the IF023 source population for the same decision date range, with no material unexplained variance.
+
+Status
+
+PASS
+
+Outcome / Evidence
+
+IF023 source returned 185,690 No Downsell and 11,530 Downsell applications, giving a Downsell rate of 5.85%. BDP returned 184,888 N and 11,347 Y, giving a Downsell rate of 5.78%. The Downsell rate differs by only 0.07 percentage points, indicating that the relatively low Downsell=Y volume in BDP is broadly consistent with the upstream IF023 source. The overall volume difference is 985 applications and can be investigated separately if required. No NULL downsell_counter values were observed in the IF023 population tested.
+
+Query Used / Evidence
+
+Use your completed IF023 vs BDP Long BT downsell reconciliation SQL and attach/link the result screenshots showing the IF023 5.85% and BDP 5.78% distributions.
