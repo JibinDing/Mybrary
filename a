@@ -1,0 +1,3 @@
+I cross-checked the assumption. Application ID + SDS counter is not unique on either side — there are 457 duplicate key combinations in Application Decision Outcome and 11,838 in IHQ_SDS_SORT.
+
+When Audit Timestamp is included, both sides have 0 duplicate key combinations. So it looks like Audit Timestamp is currently required to maintain the 1:1 mapping.
