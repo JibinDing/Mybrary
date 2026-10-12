@@ -1,0 +1,33 @@
+Test Case: Application Case Status vs Decision Engine Status Comparison
+
+Business Requirement:
+
+Validate the consistency between Application Case Status and Decision Engine Application Status to understand potential differences in declined application volumes.
+
+Test Performed:
+
+Compared CASE_STATUS_CODE from CREDIT_CARD_APPLICATION_CASE against DECISION_ENGINE_APPLICATION_STATUS from CREDIT_CARD_APPLICATION_DECISION_OUTCOME for September 2026, focusing on applications with a Case Status of DECLINE.
+
+Expected Result:
+
+Identify and document differences between the two status sources and confirm the distribution of Decision Engine Status for declined applications with Full Application (F) decision records.
+
+Actual Result:
+
+For September 2026:
+
+* Case Decline with F Decision: 22,450
+* Case Decline with Q-only Decision: 6,141
+* Case Decline with other non-F outcomes: 5
+
+For the 22,450 applications with F Decision:
+
+* Decision Engine DECLINE: 22,276
+* Decision Engine AACDECLINE: 173
+* Decision Engine CONTINUE: 1
+
+The 22,450 Case Decline applications with F Decision are closely aligned with the Legacy BDH Decline volume of 22,462, with a difference of 12 applications (-0.05%).
+
+The findings demonstrate differences in status coverage and classification between the two FDP sources. Further business clarification is required to confirm whether these differences explain the overall NCMI decline variance.
+
+Test Status: Completed – Pending Business Clarification
