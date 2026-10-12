@@ -1,0 +1,11 @@
+Complete the SmartPay data mapping documentation, including source-to-target mappings, transformation logic, and CDE identification based on the standard CDE scenarios.
+
+Share the documentation with relevant stakeholders for review and sign-off.
+
+
+
+
+
+Deploy the SmartPay historical data load changes to BDP Production through the approved Change Request.
+
+Validate the historical data load, reconcile transaction volumes with FDP, and capture testing evidence to ensure data completeness and accuracy.
