@@ -1,0 +1,27 @@
+Test Case: Legacy MA Aura vs NCMI EDP Dashboard – Application Accept Count Reconciliation
+
+Business Requirement:
+
+Validate the alignment of accepted application volumes between the legacy MA Aura dashboard and the new NCMI EDP dashboard.
+
+Test Performed:
+
+Comparison of application accept counts between the legacy MA Aura and NCMI EDP dashboards for an equivalent reporting period.
+
+Expected Result:
+
+Accepted application volumes should be broadly aligned, or any significant variances should be identified, documented and reviewed with the business.
+
+Actual Result:
+
+An approximate 10% variance has been reported between the legacy MA Aura and NCMI EDP dashboard accepted application volumes. Exact figures and screenshots are pending confirmation.
+
+The legacy MA Aura dashboard includes additional processing through the Recruitment Mart SAS process, for which the full transformation logic has not yet been investigated.
+
+A separate reconciliation against the Commercial Billing monthly sales file showed close alignment in total and accepted application volumes (refer to the Commercial Billing reconciliation test cases).
+
+The dashboard variance remains an open item requiring business review and acceptance or further prioritised investigation.
+
+Test Status: AMBER – Variance Identified / Pending Business Review
+
+Evidence: Legacy MA Aura and NCMI EDP dashboard screenshots for the same reporting period (to be attached).
