@@ -1,0 +1,13 @@
+Support NCA Day 1 BDP business testing and validation.
+
+Work completed:
+
+* Validated key application metrics and completed reconciliation testing against legacy Commercial Billing data.
+* Investigated application status and decline volume discrepancies.
+* Captured SQL queries, test results and screenshots as testing evidence.
+
+Next steps:
+
+* Complete legacy MA Aura vs EDP dashboard reconciliation evidence.
+* Finalise testing evidence and address outstanding discrepancies.
+* Support business review and data sign-off.
