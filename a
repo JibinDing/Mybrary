@@ -1,0 +1,11 @@
+Hi Rinika, a quick update on the September 2026 volume reconciliation between Legacy BDH (Commercial Billing) and NCMI BDP.
+
+For Decision Month September 2026, Legacy BDH has 131,178 applications, while NCMI BDP currently has 130,672, giving a difference of 506 applications (0.39%). This has reduced from the previous variance of approximately 0.92%.
+
+I also broke down the volumes by Application Month and found that 494 of the 506 difference comes from applications created in September.
+
+I then compared the daily volumes for September-created applications. NCMI is consistently lower than Legacy BDH by around 4–30 applications per day, with no significant single-day anomaly.
+
+This suggests a consistent difference in the population or filtering logic rather than an isolated daily data issue, although the root cause is not yet confirmed.
+
+Next, I’ll review the Legacy Commercial Billing SQL logic and compare its filters and deduplication rules against NCMI to investigate the remaining variance.
