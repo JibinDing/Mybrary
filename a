@@ -1,0 +1,3 @@
+Yes, that’s a possibility. Since NCMI applies linked application deduplication, it may be excluding additional full applications associated with the same linked application number.
+
+I’ll check how many applications are potentially removed by this logic for September and see whether that explains the variance.
