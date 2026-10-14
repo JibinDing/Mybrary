@@ -1,0 +1,9 @@
+Hi Rinika, I’m thinking of taking a different approach to investigate the remaining Commercial Billing vs NCMI variance.
+
+Rather than going through all the CTEs and legacy processing logic, I’d like to pick a specific day in September and compare the individual Application IDs between the two sources to identify which applications are missing or counted differently.
+
+For example, on 5 September, Legacy has 3,315 applications while NCMI has 3,311, so we could investigate the records behind that difference.
+
+However, both the Commercial Billing output and the BDP Aggregator Application Summary are aggregated and don’t contain individual Application IDs. I also don’t currently have access to the underlying Legacy Commercial Billing tables.
+
+Do you know if we could get an application-level extract from the Legacy side, or who might be able to help with access? I think this would be a much quicker way to identify the actual reason for the variance.
