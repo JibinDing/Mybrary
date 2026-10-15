@@ -1,7 +1,0 @@
-Hi Rinika, I’ve completed the FDP data validation following the historical data load.
-
-* Both Authorization and Transaction Status tables now contain data from 1 April to 14 October.
-* No missing transaction references were identified for SmartPay transactions from 2 August onwards.
-* NGCB validation: 556,583 transactions checked, all matched successfully, with 0 missing references.
-
-The transaction reference completeness checks have passed.
