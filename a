@@ -1,0 +1,9 @@
+Hi Rinika, I’ve managed to replicate Kirsty’s SQL logic in Hue up to the Recruitment Mart join.
+
+For 5 September, I retrieved 79,194 application-level records from the preceding steps.
+
+However, I found that U_BUKC_DSA_BIV_BT_DB.RECRUITMENT_MART0 is currently empty (0 rows), which explains why the final join returns no records.
+
+Do you know if there’s another populated Recruitment Mart table or snapshot available, or whether Kirsty could help identify the correct source?
+
+I think this is the main blocker to reproducing the final Legacy Billing application population.
