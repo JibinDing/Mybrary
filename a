@@ -1,3 +1,0 @@
-Hi Rinika, just noticed that the SmartPay Day 0 script currently starts from 2nd August, but FDP historical data is now available from 1st April.
-
-Should we update the Day 0 reload start date to 1st April to include the full historical data, or keep it as 2nd August for this CR?
