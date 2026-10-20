@@ -1,0 +1,23 @@
+September 1, 2026 — Application-level Reconciliation
+
+An application-level comparison was performed between Legacy Commercial Billing Base and the FDP application extract for applications created on 1 September 2026, using the September decision/approval date filters.
+
+* Legacy Commercial Billing Base: 4,037 unique applications
+* FDP Extract: 4,034 unique applications
+* Matched Applications: 4,034
+* Legacy Only: 3
+* FDP Only: 0
+* Net Variance: -3 (-0.074%)
+
+Variance Investigation:
+
+All three unmatched application IDs were identified in FDP source data.
+
+* 378554328 and 378611926 were excluded because no Full Application decision outcome (QUOTE_STATUS_CODE = ‘F’) was identified.
+* 378756513 was excluded because no active application record satisfied the September approval date filter.
+
+The three-record variance is fully accounted for at Application ID level under the extraction criteria tested.
+
+Status: Variance Explained — Subject to Business Rule Validation
+
+This reconciliation validates the selected sample and FDP extraction logic. Alignment with the final NCMI production population and decision-date mapping remains to be confirmed.
