@@ -1,0 +1,7 @@
+Hi Rinika, I’ve confirmed that both 378554328 and 378611926 have QUOTE_STATUS_CODE = ‘+’ in September (6 and 8 records respectively).
+
+I also checked the NCMI stored procedure, and the APP_DATA CTE currently filters only QUOTE_STATUS_CODE = ‘F’, excluding ‘+’.
+
+This appears to explain 2 of the 3 missing applications. Could you confirm whether ‘+’ should be treated as ‘F’ in NCMI?
+
+The remaining application (378756513) is still under investigation.
