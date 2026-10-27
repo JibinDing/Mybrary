@@ -1,0 +1,16 @@
+Hi Rinika, I’ve done some further investigation into the 3 unmatched applications for 1st September.
+
+For 378554328 and 378611926, I couldn’t identify qualifying Full Application decision records (QUOTE_STATUS_CODE = ‘F’) under the September criteria, which appears to explain why they are not included in the FDP application count.
+
+For 378756513, I’ve confirmed that:
+
+* Full Application decisions exist in September.
+* CASE_CREATION_DATE is 1st September.
+* The application is linked to the first check (378754715).
+* It is selected by the linked application deduplication logic (RN = 1).
+* However, the current active application record has an approval date of 5th October.
+* The LAST_PASS logic selects different decision records depending on the processing window (2nd September vs 5th October).
+
+This suggests that the remaining discrepancy may be related to how historical application versions and decision records are selected across reporting periods, rather than missing source data or linked application deduplication.
+
+I haven’t confirmed the exact downstream exclusion point yet, but these findings help narrow down the likely reason for the difference between Legacy and NCMI.
