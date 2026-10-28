@@ -1,7 +1,0 @@
-Hi Rinika, for 378756513, I’ve confirmed that the September Full Application records exist, CASE_CREATION_DATE is 1st September, and the application is selected by the linked application deduplication logic (RN = 1).
-
-I’ve also checked BASE_SUM1, which filters on CASE_CREATION_DATE rather than Decision Date.
-
-So far, I haven’t found evidence of the application being excluded by these checks, although I haven’t verified every downstream CTE.
-
-I think confirming the date filter used by Mark’s Legacy dashboard would be the most useful next step.
