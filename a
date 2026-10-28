@@ -1,5 +1,0 @@
-Hi, I’ve checked the Aggregator data in BDP and confirmed that both Application Created Date and Decision Date start from 25 January 2026.
-
-The FDP source contains earlier records, but all 5.6m PRODUCTAPP case records from 1–24 January have ACTIVE = ‘0’. The Aggregator procedure joins to PRODUCTAPP cases using ACTIVE = ‘1’, and the first active records appear on 25 January.
-
-This aligns with the start date shown in Tableau and is a likely contributing factor, although we haven’t confirmed it as the definitive root cause.
