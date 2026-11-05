@@ -1,0 +1,56 @@
+Thanks for the detailed onboarding report. The repository findings and requirement analysis are very helpful.
+
+Before we begin writing or executing any SQL, I would like to resolve the most important technical dependency: where the actual PCSM Document Proof Codes and AIV results are stored, and how they can be linked to our existing Mortgage Base Population.
+
+Please continue with read-only static analysis.
+
+First, inspect the following documents that you have not yet fully reviewed:
+
+* MAE_PCSM_ODU_Mapping_Document 3.xlsx
+* ODU and CRDW Mapping 3.xlsx
+* RESI_4.1_Field_Mapping.csv
+* RESI_4.1_Requirements_vs_Implementation.csv
+
+Also examine any relevant SQL scripts, parameter files, and project documentation.
+
+Focus specifically on identifying the source tables and fields for:
+
+* Actual recorded Document Proof Codes (DP01, DP06, DP10, DP11, DP15, DP17, DP43, etc.).
+* AIV pass/fail results and income verification indicators.
+* Applicant-level identification and the relationship to sys_recordkey and dw_bus_dt.
+* PCSM assessment stages, particularly Stage 40 and Stage 45.
+* Underwriter overrides and how they affect expected document codes.
+
+Please distinguish Document Proof Codes (DPxx) from other PCSM policy or referral codes (such as DR98). Do not assume they are stored in the same fields.
+
+For every possible mapping, provide the exact source file, worksheet and cell range, or SQL file and relevant lines.
+
+Clearly separate confirmed mappings from assumptions and missing information.
+
+Your output should be a focused mapping table showing the business concept, possible source table, field name, supporting evidence and verification status.
+
+Finally, list the specific questions that still need to be raised with Ben, Priya or the PCSM SMEs.
+
+Do not modify any repository files, generate implementation SQL, or execute database queries at this stage.
+
+Please focus only on this source-data discovery task. We will address implementation and testing after reviewing your findings.
+
+
+Important — Project Instructions and Source of Truth
+
+Please treat the repository’s CLAUDE.md as the primary source of truth for this project.
+
+If any information, assumptions, technical descriptions, development conventions, or implementation guidance from my previous prompts conflicts with CLAUDE.md, always follow CLAUDE.md rather than my previous prompts.
+
+My previous prompts were based on Knowledge Transfer meetings and my preliminary understanding of the project, so some details may be incomplete, outdated, or inaccurate.
+
+Please follow these principles:
+
+1. Read and understand the applicable CLAUDE.md instructions before proceeding with further analysis.
+2. Prioritise CLAUDE.md for project architecture, coding conventions, technical workflows, and development standards.
+3. Use the actual repository files, SQL implementations, and latest approved business requirements to verify factual claims.
+4. If you identify contradictions between CLAUDE.md, existing SQL, and business requirements, highlight them explicitly rather than silently choosing an interpretation.
+5. Do not modify CLAUDE.md or any other project files without my explicit approval.
+6. Continue to operate in read-only analysis mode until I authorise implementation or execution.
+
+In summary: CLAUDE.md takes precedence over my previous prompts, but any unresolved conflicts with actual code or business policy must be reported for clarification.
