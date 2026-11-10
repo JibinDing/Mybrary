@@ -1,0 +1,10 @@
+Hi Rinika, the NCMI + to F change has been deployed to PROD.
+
+I’ve compared the September 2026 volumes before and after deployment:
+
+* Application Count: 129,762 → 129,786 (+24, 0.0185%)
+* Application Accept Count: 105,280 → 105,297 (+17, 0.0161%)
+
+The increase is very small, as expected, with no unexpected drops in daily application volumes. The results look consistent with the expected impact of the change.
+
+I’ve captured the before/after screenshots as CR testing evidence. I’ll also validate that the increase is attributable to the + records.
