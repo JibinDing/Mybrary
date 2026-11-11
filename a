@@ -1,0 +1,9 @@
+Following the latest NCMI production deployment, the variance in accepted application volumes between the Legacy MA Aura and NCMI EDP dashboards has reduced significantly to less than 1%.
+
+The latest comparison indicates that the monthly volumes are now closely aligned, with no significant unexplained variance observed.
+
+The improvement is consistent with the recent Full Application logic changes, including the treatment of ‘+’ records as ‘F’.
+
+The remaining minor differences are considered acceptable for NCMI testing closure, as discussed with the team. Updated dashboard screenshots are being captured to support the final evidence.
+
+Any further investigation into the legacy Recruitment Mart SAS transformations or Commercial Billing application-level differences will be tracked separately if required.
