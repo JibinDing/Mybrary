@@ -1,9 +1,0 @@
-I’m comparing these two SQL stored procedures.
-
-For 2 September 2026, the overall Total API Quote count matches exactly between the Legacy and New BDP tables.
-
-However, when grouped by REQUESTED_PRODUCT_1_CODE, the counts are different for several product codes.
-
-Can you compare the two SQL files and explain why the counts differ by product code even though the overall total matches?
-
-Please identify the exact differences in the SQL logic that could cause this, with relevant line numbers.
